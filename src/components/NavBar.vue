@@ -1,20 +1,23 @@
 <script setup>
 import { RouterLink } from "vue-router";
+import { ref } from "vue";
 const props = defineProps({
   links: Array,
 });
+const imgs = ["Inicio2", "Rutina2", "Ejercicios2", "Progreso2"];
+const imagen = ref("imagen");
 </script>
 
 <template>
   <header>
-    <div class="border-t-4 border-white text-sm pt-3">
+    <div class="border-t-4 border-white text-sm pt-10">
       <nav class="nav flex justify-center">
         <RouterLink
           v-for="link in props.links"
           :key="link"
           :to="{ name: link }"
         >
-          <img src="./../assets/home.png" class="h-6 w-6" />
+          <img :src="`./src/assets/${link}.png`" class="h-6 w-6" id="imagen" />
           {{ link }}
         </RouterLink>
       </nav>

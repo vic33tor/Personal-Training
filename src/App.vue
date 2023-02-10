@@ -5,12 +5,15 @@ import CabeceraPrincipal from "@/components/CabeceraPrincipal.vue";
 </script>
 
 <template>
-  <CabeceraPrincipal titulo="Personal training" />
-
-  <div>
-    <RouterView />
+  <div class="h-full flex flex-col">
+    <div class="basis-4/5">
+      <CabeceraPrincipal titulo="Personal training" />
+      <RouterView />
+    </div>
+    <div class="basis-1/5">
+      <NavBar :links="['Inicio', 'Rutina', 'Ejercicios', 'Progreso']" />
+    </div>
   </div>
-  <NavBar :links="['Inicio', 'Rutina', 'Ejercicios', 'Progreso']" />
 </template>
 
 <style scoped></style>
