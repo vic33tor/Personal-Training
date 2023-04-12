@@ -4,8 +4,6 @@ import { ref } from "vue";
 const props = defineProps({
   links: Array,
 });
-const imgs = ["Inicio2", "Rutina2", "Ejercicios2", "Progreso2"];
-const imagen = ref("imagen");
 </script>
 
 <template>
