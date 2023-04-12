@@ -5,12 +5,24 @@ import EjerciciosPropuestos from "@/views/EjerciciosPropuestos.vue";
 import MiProgreso from "@/views/MiProgreso.vue";
 import VerRutina from "@/views/VerRutina.vue";
 import CreaRutina from "@/views/CreaRutina.vue";
+import LogIn from "@/views/LogIn.vue";
+import SignUp from "@/views/SignUp.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
+      name: "Log in",
+      component: LogIn,
+    },
+    {
+      path: "/Resgistrase",
+      name: "Sign up",
+      component: SignUp,
+    },
+    {
+      path: "/home",
       name: "Inicio",
       component: MiInicio,
     },
