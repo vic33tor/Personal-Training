@@ -1,11 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-*{
- font-family: "Roboto Condensed", sans-serif;   
- background-color: #191A19; 
+* {
+  font-family: "Roboto Condensed", sans-serif;
 }
-html,body,#app{
-    height: 100%;
-    width: 100%;
+html,
+body,
+#app {
+  height: 100%;
+  width: 100%;
 }
