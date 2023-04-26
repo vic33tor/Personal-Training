@@ -46,5 +46,7 @@ export const onLogIn = (ref, valorNombre, callback) => {
   );
 };
 
+export const anade = (ref, el) => addDoc(collection(db, ref), el);
+
 export const registraUsuario = (ref, usuario) =>
   addDoc(collection(db, ref), usuario);
