@@ -16,4 +16,8 @@ import CabeceraPrincipal from "@/components/CabeceraPrincipal.vue";
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+* {
+  background-color: rgb(65, 65, 65);
+}
+</style>

@@ -18,7 +18,7 @@ const router = createRouter({
     },
     {
       path: "/Resgistrase",
-      name: "Sign up",
+      name: "SignUp",
       component: SignUp,
     },
     {
