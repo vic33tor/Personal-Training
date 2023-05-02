@@ -7,7 +7,7 @@ import CabeceraPrincipal from "@/components/CabeceraPrincipal.vue";
 <template>
   <div class="h-full flex flex-col">
     <div class="basis-4/5">
-      <CabeceraPrincipal titulo="Personal training" />
+      <CabeceraPrincipal titulo="Just Fit" />
       <RouterView />
     </div>
     <div class="basis-1/5">

@@ -7,7 +7,7 @@ const props = defineProps({
 
 <template>
   <header>
-    <div class="border-t-4 border-white text-sm pt-10">
+    <div class="contenedorNav">
       <nav class="nav flex justify-center">
         <RouterLink
           v-for="link in props.links"
@@ -34,5 +34,11 @@ nav a {
 .router-link-active {
   --tw-text-opacity: 1;
   color: rgb(253 224 71 / var(--tw-text-opacity));
+}
+
+.contenedorNav{
+  border: 1px solid white;
+  font-size: small;
+  padding: 10px 0 20px 0;
 }
 </style>
