@@ -42,6 +42,8 @@
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { registraUsuario } from "../API/firebase";
+import { useDatosStore } from "@/stores/DatosForm";
+const datos = useDatosStore();
 
 let nombre = ref("");
 let passwd = ref("");
@@ -58,6 +60,7 @@ const registro = () => {
     name: "Inicio",
     params: { name: nombre.value },
   });
+  datos.guardarUsuario(nombre.value, passwd.value);
 };
 </script>
 
