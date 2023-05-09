@@ -14,15 +14,21 @@
       <h1>Numero de ejercicios</h1>
       <input class="mb-3" v-model="num_ejs" type="number" placeholder="1" />
       <ul>
-        <li v-for="(el, idx) in num_ejs" :key="idx">
-          {{ el }}
+        <li v-for="(el, index) in lista_ejs" :key="index">
+          {{ index + 1 }}
           <input
             class="mr-2"
-            v-model="nombre_ejs"
+            v-model="lista_ejs.nombre"
+            :name="'nombre-' + index"
             type="text"
             placeholder="nombre"
           />
-          <input v-model="series" type="number" placeholder="numero series" />
+          <input
+            v-model="lista_ejs.series"
+            :name="'series' + index"
+            type="number"
+            placeholder="numero series"
+          />
         </li>
       </ul>
       <h1>Dia de la semana</h1>
@@ -33,17 +39,40 @@
         <option>Jueves</option>
         <option>Viernes</option>
         <option>Sabado</option>
-        <option>Lunes</option>
+        <option>Domingo</option>
       </select>
-      <button class="bg-yellow-300 pl-2 pr-2">Añadir</button>
+      <button class="bg-yellow-300 pl-2 pr-2" @click="anhadirDia">
+        Añadir
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-
+import { ref, onMounted, watch } from "vue";
+import { anade, editar, onLogIn } from "@/API/firebase";
+import { useDatosStore } from "@/stores/DatosForm";
+const datos = useDatosStore();
+onMounted(async () => {
+  let id;
+  onLogIn("USUARIOS", datos.getUsuario, (docs) => {
+    docs.forEach((doc) => {
+      id = doc.id;
+    });
+  });
+  anade("RUTINAS", { id: id.value });
+});
 let num_ejs = ref(0);
+let lista_ejs = ref([]);
+watch(
+  () => num_ejs,
+  (value) => {
+    lista_ejs.value = new Array(value).fill({ nombre: "", series: "" });
+  }
+);
+const anhadirDia = () => {
+  
+};
 </script>
 
 <style scoped>

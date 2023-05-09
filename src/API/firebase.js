@@ -40,3 +40,6 @@ export const anade = (ref, el) => addDoc(collection(db, ref), el);
 
 export const registraUsuario = (ref, usuario) =>
   addDoc(collection(db, ref), usuario);
+
+export const editar = (ref, id, objeto) => updateDoc(doc(db, ref, id), objeto);
+

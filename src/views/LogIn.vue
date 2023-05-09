@@ -22,6 +22,8 @@
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { onLogIn } from "../API/firebase";
+import { useDatosStore } from "@/stores/DatosForm";
+const datos = useDatosStore();
 
 let nombre = ref("");
 let passwd = ref("");
@@ -38,6 +40,7 @@ const logIn = () => {
         : alert("Nombre o contraseña incorrectos");
     });
   });
+  datos.guardarUsuario(nombre.value, passwd.value);
 };
 
 const registro = () => {
