@@ -1,17 +1,20 @@
 <template>
-  <div class="aperturaInicio">
-    <div class="slogan">
-      <h1>
-        ENTRENAMIENTOS A MEDIDA PARA ALCANZAR EL OBJETIVO QUE TÚ TE PROPONGAS
-      </h1>
+  <div class="flex gap-2 ">
+    <img
+      class="w-6/12"
+      src="../assets/images/3df7817728fa04eb106c782b2db0d71c-removebg-preview.png"
+      alt=""
+    />
+    <div
+      class="z-10 absolute w-5/6 right-0 top-28 text-center"
+    >
+      <div class="bg-opacity-75 rounded-lg p-6">
+        <h1 class="text-white text-3xl font-bold">
+          ENTRENAMIENTOS A MEDIDA PARA ALCANZAR EL OBJETIVO QUE TÚ TE PROPONGAS
+        </h1>
+      </div>
     </div>
-    <div>
-      <img
-        class="imagenInicio"
-        src="../assets/images/3df7817728fa04eb106c782b2db0d71c-removebg-preview.png"
-        alt=""
-      />
-    </div>
+  
   </div>
   <div class="shortText">
     <h1 class="solo">Solo en</h1>
@@ -59,6 +62,7 @@ import MiCarousel from "../components/MiCarousel.vue";
 </script>
 
 <style scoped>
+/*
 .aperturaInicio {
   display: flex;
   gap: 50px;
@@ -82,7 +86,7 @@ import MiCarousel from "../components/MiCarousel.vue";
   right: 5em;
   opacity: 50%;
 }
-
+*/
 .shortText {
   display: flex;
   gap: 5px;
@@ -129,8 +133,9 @@ import MiCarousel from "../components/MiCarousel.vue";
   transform: scale(1.02);
 }
 
-.carouselRecetas{
+.carouselRecetas {
   width: 75%;
   margin: 0 auto;
+  margin-bottom: 10px;
 }
 </style>
