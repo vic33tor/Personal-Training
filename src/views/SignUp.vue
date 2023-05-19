@@ -41,7 +41,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { ref } from "vue";
-import { registraUsuario } from "../API/firebase";
+import { registraUsuario, onLogIn } from "../API/firebase";
 import { useDatosStore } from "@/stores/DatosForm";
 const datos = useDatosStore();
 
@@ -56,11 +56,15 @@ const registro = () => {
     contrasena: passwd.value,
     email: email.value,
   });
+  onLogIn("USUARIOS", nombre.value, (docs) => {
+    docs.forEach((doc) => {
+      datos.guardarUsuario(doc.id);
+    });
+  });
   router.push({
     name: "Inicio",
     params: { name: nombre.value },
   });
-  datos.guardarUsuario(nombre.value, passwd.value);
 };
 </script>
 

@@ -36,10 +36,17 @@ export const onLogIn = (ref, valorNombre, callback) => {
   );
 };
 
+export const onGetRutina = (ref, user_id, callback) => {
+  onSnapshot(
+    query(collection(db, ref), where("user_id", "==", user_id)),
+    callback
+  );
+};
+
 export const anade = (ref, el) => addDoc(collection(db, ref), el);
 
 export const registraUsuario = (ref, usuario) =>
   addDoc(collection(db, ref), usuario);
 
-export const editar = (ref, id, objeto) => updateDoc(doc(db, ref, id), objeto);
-
+export const updateRutina = (ref, id, objeto) =>
+  updateDoc(doc(db, ref, id), objeto);

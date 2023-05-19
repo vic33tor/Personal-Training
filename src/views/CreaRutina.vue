@@ -14,20 +14,20 @@
       <h1>Numero de ejercicios</h1>
       <input class="mb-3" v-model="num_ejs" type="number" placeholder="1" />
       <ul>
-        <li v-for="(el, index) in lista_ejs" :key="index">
+        <li v-for="(el, index) in num_ejs" :key="index">
           {{ index + 1 }}
           <input
             class="mr-2"
-            v-model="lista_ejs.nombre"
-            :name="'nombre-' + index"
+            :name="'nombre-' + index + 1"
             type="text"
             placeholder="nombre"
+            v-model="nombres[index]"
           />
           <input
-            v-model="lista_ejs.series"
-            :name="'series' + index"
+            :name="'series' + index + 1"
             type="number"
             placeholder="numero series"
+            v-model="series[index]"
           />
         </li>
       </ul>
@@ -49,29 +49,35 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
-import { anade, editar, onLogIn } from "@/API/firebase";
+import { ref, onMounted } from "vue";
+import { anade, updateRutina, onGetRutina } from "@/API/firebase";
 import { useDatosStore } from "@/stores/DatosForm";
 const datos = useDatosStore();
 onMounted(async () => {
-  let id;
-  onLogIn("USUARIOS", datos.getUsuario, (docs) => {
-    docs.forEach((doc) => {
-      id = doc.id;
+  if (!datos.getRutina) {
+    console.log(datos.getUsuario)
+    anade("RUTINAS", { user_id: datos.getUsuario });
+    onGetRutina("RUTINAS", datos.getUsuario, (docs) => {
+      docs.forEach((doc) => {
+        datos.guardarRutina(doc.id);
+      });
     });
-  });
-  anade("RUTINAS", { id: id.value });
-});
-let num_ejs = ref(0);
-let lista_ejs = ref([]);
-watch(
-  () => num_ejs,
-  (value) => {
-    lista_ejs.value = new Array(value).fill({ nombre: "", series: "" });
   }
-);
+});
+let nombre_musculo = ref("");
+let num_ejs = ref(0);
+let nombres = ref([]);
+let series = ref([]);
 const anhadirDia = () => {
-  
+  let rutina = [];
+  for (let i = 0; i < num_ejs.value; i++) {
+    const nombre = nombres.value[i];
+    const serie = series.value[i];
+    rutina.push({ nombre: nombre, series: serie });
+  }
+  updateRutina("RUTINAS", datos.getRutina, {
+    Lunes: rutina
+  });
 };
 </script>
 
