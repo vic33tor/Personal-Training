@@ -32,15 +32,18 @@ const router = useRouter();
 const logIn = () => {
   onLogIn("USUARIOS", nombre.value, (docs) => {
     docs.forEach((doc) => {
-      doc.data().contrasena == passwd.value
-        ? router.push({
-            name: "Inicio",
-            params: { name: doc.data().nombre },
-          })
-        : alert("Nombre o contraseña incorrectos");
+      if (doc.data().contrasena == passwd.value) {
+        console.log(doc.id)
+        datos.guardarUsuario(doc.id);
+        router.push({
+          name: "Inicio",
+          params: { name: doc.data().nombre },
+        });
+      } else {
+        alert("Nombre o contraseña incorrectos");
+      }
     });
   });
-  datos.guardarUsuario(nombre.value, passwd.value);
 };
 
 const registro = () => {
