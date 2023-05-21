@@ -6,7 +6,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <header>
+  <header class="fixed bottom-0 w-full">
     <div class="contenedorNav">
       <nav class="nav flex justify-center">
         <RouterLink
@@ -23,6 +23,7 @@ const props = defineProps({
 </template>
 
 <style scoped>
+/* Estilos del navbar */
 nav a {
   width: 100%;
   display: flex;
@@ -36,7 +37,15 @@ nav a {
   color: rgb(253 224 71 / var(--tw-text-opacity));
 }
 
-.contenedorNav{
+/* Estilos de posicionamiento */
+header {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 9999; /* Ajusta este valor según sea necesario */
+}
+
+.contenedorNav {
   border: 1px solid white;
   font-size: small;
   padding: 10px 0 20px 0;

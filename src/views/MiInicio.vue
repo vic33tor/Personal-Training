@@ -1,20 +1,17 @@
 <template>
-  <div class="flex gap-2 ">
+  <div class="flex gap-2">
     <img
       class="w-6/12"
       src="../assets/images/3df7817728fa04eb106c782b2db0d71c-removebg-preview.png"
       alt=""
     />
-    <div
-      class="z-10 absolute w-5/6 right-0 top-28 text-center"
-    >
+    <div class="z-10 absolute w-5/6 right-0 top-28 text-center">
       <div class="bg-opacity-75 rounded-lg p-6">
         <h1 class="text-white text-3xl font-bold">
           ENTRENAMIENTOS A MEDIDA PARA ALCANZAR EL OBJETIVO QUE TÚ TE PROPONGAS
         </h1>
       </div>
     </div>
-  
   </div>
   <div class="shortText">
     <h1 class="solo">Solo en</h1>
@@ -54,11 +51,26 @@
   </div>
   <div class="carouselRecetas">
     <MiCarousel />
+    <button
+      class="bg-yellow-300 pl-2 pr-2 mt-2 rounded-sm hover:bg-yellow-500"
+      @click="verRectas"
+    >
+      Ver más recetas
+    </button>
   </div>
 </template>
 
 <script setup>
 import MiCarousel from "../components/MiCarousel.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const verRectas = () => {
+  router.push({
+    name: "MisRecetas",
+  });
+};
 </script>
 
 <style scoped>
