@@ -7,13 +7,16 @@ import VerRutina from "@/views/VerRutina.vue";
 import CreaRutina from "@/views/CreaRutina.vue";
 import LogIn from "@/views/LogIn.vue";
 import SignUp from "@/views/SignUp.vue";
+import MisRecetas from "@/views/MisRecetas.vue";
+import RecetaInfo from "../views/RecetaInfo.vue";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
-      name: "Log in",
+      name: "Login",
       component: LogIn,
     },
     {
@@ -54,6 +57,17 @@ const router = createRouter({
       path: "/Progreso",
       name: "Progreso",
       component: MiProgreso,
+    },
+    {
+      path: "/Recetas",
+      name: "MisRecetas",
+      component: MisRecetas,
+    },
+    {
+      path: "/RecetaInfo",
+      name: "RecetaInfo",
+      component: RecetaInfo,
+      props: true
     },
   ],
 });

@@ -50,3 +50,6 @@ export const registraUsuario = (ref, usuario) =>
 
 export const updateRutina = (ref, id, objeto) =>
   updateDoc(doc(db, ref, id), objeto);
+
+export const onDameReceta = (ref, callback) =>
+  onSnapshot(collection(db, ref), callback);
