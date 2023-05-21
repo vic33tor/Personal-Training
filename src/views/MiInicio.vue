@@ -145,9 +145,10 @@ const verRectas = () => {
   transform: scale(1.02);
 }
 
+
 .carouselRecetas {
   width: 75%;
   margin: 0 auto;
-  margin-bottom: 10px;
+  margin-bottom: 100px; /* Ajusta el margen inferior para evitar que se corte el contenido */
 }
 </style>
