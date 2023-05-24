@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex mx-auto bg-white rounded-xl shadow-md overflow-hidden w-3/4 mt-3 mb-3"
+    class="flex mx-auto bg-white rounded-xl shadow-md overflow-hidden w-3/4 mt-3 mb-20"
   >
     <div class="w-3/4">
       <img
