@@ -9,6 +9,7 @@ import LogIn from "@/views/LogIn.vue";
 import SignUp from "@/views/SignUp.vue";
 import MisRecetas from "@/views/MisRecetas.vue";
 import RecetaInfo from "../views/RecetaInfo.vue";
+import MisVarios from "../views/MisVarios.vue";
 
 
 const router = createRouter({
@@ -67,6 +68,12 @@ const router = createRouter({
       path: "/RecetaInfo",
       name: "RecetaInfo",
       component: RecetaInfo,
+      props: true
+    },
+    {
+      path: "/Varios",
+      name: "Varios",
+      component: MisVarios,
       props: true
     },
   ],

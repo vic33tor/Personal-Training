@@ -11,7 +11,9 @@ import CabeceraPrincipal from "@/components/CabeceraPrincipal.vue";
       <RouterView />
     </div>
     <div class="basis-1/5">
-      <NavBar :links="['Inicio', 'Rutina', 'Ejercicios', 'Progreso']" />
+      <NavBar
+        :links="['Inicio', 'Rutina', 'Ejercicios', 'Progreso', 'Varios']"
+      />
     </div>
   </div>
 </template>

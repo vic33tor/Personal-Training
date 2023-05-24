@@ -44,7 +44,7 @@ const dameRecetas = () => {
 const verUnaReceta = (id) => {
   router.push({
     name: "RecetaInfo",
-    query: { id: id }
+    query: { id: id },
   });
 };
 </script>
