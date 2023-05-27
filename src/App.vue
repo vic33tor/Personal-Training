@@ -5,14 +5,14 @@ import CabeceraPrincipal from "@/components/CabeceraPrincipal.vue";
 </script>
 
 <template>
-  <div class="h-full flex flex-col">
-    <div class="basis-4/5">
+  <div class="h-full">
+    <div class="">
       <CabeceraPrincipal titulo="Just Fit" />
       <RouterView />
     </div>
     <div class="basis-1/5">
       <NavBar
-        :links="['Inicio', 'Rutina', 'Ejercicios', 'Progreso', 'Varios']"
+        :links="['Inicio', 'Rutina', 'Ejercicios', 'Progreso', 'Servicios']"
       />
     </div>
   </div>
@@ -20,6 +20,6 @@ import CabeceraPrincipal from "@/components/CabeceraPrincipal.vue";
 
 <style scoped>
 * {
-  background-color: rgb(65, 65, 65);
+  background-color: rgb(63, 63, 63);
 }
 </style>

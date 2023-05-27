@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class=" bg-stone-200 rounded-lg p-4">
+    <div class="bg-stone-200 rounded-lg p-4">
       <div class="flex flex-col items-center">
         <div class="h-56 overflow-hidden mb-2 rounded-t-lg">
           <img
@@ -47,15 +47,18 @@
 
 <style scoped>
 .container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  align-content: center;
+  width: 100%;
+  text-align: center;
   justify-content: center;
-  margin-top: 12px;
-  margin-bottom: 100px;
+  margin: 0 auto;
+  align-items: center;
+  display: flex;
+  gap: 8px;
 }
-
-
-
+@media screen and (max-width: 778px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+}
 </style>

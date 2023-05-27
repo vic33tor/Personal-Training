@@ -11,7 +11,6 @@ import MisRecetas from "@/views/MisRecetas.vue";
 import RecetaInfo from "../views/RecetaInfo.vue";
 import MisVarios from "../views/MisVarios.vue";
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -68,13 +67,13 @@ const router = createRouter({
       path: "/RecetaInfo",
       name: "RecetaInfo",
       component: RecetaInfo,
-      props: true
+      props: true,
     },
     {
-      path: "/Varios",
-      name: "Varios",
+      path: "/Servicios",
+      name: "Servicios",
       component: MisVarios,
-      props: true
+      props: true,
     },
   ],
 });

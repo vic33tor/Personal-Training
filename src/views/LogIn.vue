@@ -33,7 +33,7 @@ const logIn = () => {
   onLogIn("USUARIOS", nombre.value, (docs) => {
     docs.forEach((doc) => {
       if (doc.data().contrasena == passwd.value) {
-        console.log(doc.id)
+        console.log(doc.id);
         datos.guardarUsuario(doc.id);
         router.push({
           name: "Inicio",
