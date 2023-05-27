@@ -1,62 +1,76 @@
 <template>
-  <div class="flex gap-2">
-    <img
-      class="w-6/12"
-      src="../assets/images/3df7817728fa04eb106c782b2db0d71c-removebg-preview.png"
-      alt=""
-    />
-    <div class="z-10 absolute w-5/6 right-0 top-28 text-center">
-      <div class="bg-opacity-75 rounded-lg p-6">
-        <h1 class="text-white text-3xl font-bold">
+  <div class="container">
+    <header class="header flex">
+      <img
+        class="w-7/12 opacity-50 mt-5 ml-6"
+        src="../assets/images/3df7817728fa04eb106c782b2db0d71c-removebg-preview.png"
+        alt=""
+      />
+      <div class="z-10 top-28 text-center absolute mr-8">
+        <h1
+          class="text-white text-xl font-bold rounded-lg bg-stone-500 bg-opacity-30 p-3"
+        >
           ENTRENAMIENTOS A MEDIDA PARA ALCANZAR EL OBJETIVO QUE TÚ TE PROPONGAS
         </h1>
       </div>
+    </header>
+    <div class="shortText mt-2">
+      <h1 class="solo">Solo en</h1>
+      <h1 class="name">Just Fit</h1>
     </div>
-  </div>
-  <div class="shortText">
-    <h1 class="solo">Solo en</h1>
-    <h1 class="name">Just Fit</h1>
-  </div>
-  <div class="propuestas">
-    <div class="elementoPropuesta">
-      <img src="../assets/Images/entrenamiento-personalizado.jpg" alt="" />
-      <h1>Entrenamiento personalizado</h1>
-      <h2>Crea tu rutina en muy pocos clicks</h2>
+
+    <div class="propuestas">
+      <div class="elementoPropuesta">
+        <div class="imagenPropuesta">
+          <img
+            src="../assets/Images/entrenamiento-personalizado.jpg"
+            alt=""
+            class=""
+          />
+        </div>
+        <div class="textoPropuesta">
+          <h1 class="">Rutinas</h1>
+        </div>
+      </div>
+
+      <div class="elementoPropuesta">
+        <div class="imagenPropuesta">
+          <img src="../assets/Images/ClasesMedida.jpg" alt="" />
+        </div>
+        <div class="textoPropuesta">
+          <h1 class="">Apúntate a clases a medida</h1>
+        </div>
+      </div>
+      <div class="elementoPropuesta">
+        <div class="imagenPropuesta">
+          <img src="../assets/Images/monitGym.jpg" alt="" />
+        </div>
+        <div class="textoPropuesta">
+          <h1 class="">Monitores y clases</h1>
+        </div>
+      </div>
+      <div class="elementoPropuesta">
+        <div class="imagenPropuesta">
+          <img src="../assets/Images/recetaFitCard.jpg" alt="" />
+        </div>
+        <div class="textoPropuesta">
+          <h1 class="">Recetas fit</h1>
+        </div>
+      </div>
     </div>
-    <div class="elementoPropuesta">
-      <img src="../assets/Images/ClasesMedida.jpg" alt="" />
-      <h1>Apúntate a clases a medida</h1>
-      <h2>
-        Las clases colectivas son una forma entretenida de completar tu
-        entrenamiento. Corre a echar un vistazo!
-      </h2>
+    <div class="shortText">
+      <h1 class="solo">Nuestras</h1>
+      <h1 class="name">recetas fit</h1>
     </div>
-    <div class="elementoPropuesta">
-      <img src="../assets/Images/monitGym.jpg" alt="" />
-      <h1>Monitores que apoyan tu entrenamiento</h1>
-      <h2>Facilitamos la asesoría de los mejores profesionales.</h2>
+    <div class="carouselRecetas">
+      <MiCarousel />
+      <button
+        class="bg-yellow-300 pl-2 pr-2 mt-2 rounded-sm hover:bg-yellow-500"
+        @click="verRectas"
+      >
+        Ver más recetas
+      </button>
     </div>
-    <div class="elementoPropuesta">
-      <img src="../assets/Images/recetaFitCard.jpg" alt="" />
-      <h1>Recetas fit para mejorar en el día a día</h1>
-      <h2>
-        Las recetas gastronómicas más eficaces para complementar el ejercicio
-        diario
-      </h2>
-    </div>
-  </div>
-  <div class="shortText">
-    <h1 class="solo">Nuestras</h1>
-    <h1 class="name">recetas fit</h1>
-  </div>
-  <div class="carouselRecetas">
-    <MiCarousel />
-    <button
-      class="bg-yellow-300 pl-2 pr-2 mt-2 rounded-sm hover:bg-yellow-500"
-      @click="verRectas"
-    >
-      Ver más recetas
-    </button>
   </div>
 </template>
 
@@ -99,6 +113,18 @@ const verRectas = () => {
   opacity: 50%;
 }
 */
+.container {
+  margin: 0 auto;
+}
+
+.header {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+}
+
 .shortText {
   display: flex;
   gap: 5px;
@@ -112,43 +138,80 @@ const verRectas = () => {
 .name {
   color: yellow;
 }
-
 .propuestas {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: center;
+  align-items: center;
+  align-content: center;
   gap: 20px;
-  padding: 0 10px 0 10px;
+  padding: 10px;
 }
 
 .elementoPropuesta {
-  border: solid 1px white;
   width: 25%;
-  height: 350px;
-  box-shadow: 0 4px 8px 0 rgba(162, 255, 0, 0.2);
   transition: 0.3s;
   color: white;
-  border-radius: 10px;
-}
-
-.elementoPropuesta h1 {
-  width: 100%;
-  font-size: large;
-}
-.elementoPropuesta img {
-  border-radius: 10px;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }
 
 .elementoPropuesta:hover {
-  box-shadow: 0 15px 16px 0 rgba(229, 255, 0, 0.2);
-  transform: scale(1.02);
+  transform: scale(1.01);
 }
 
+.textoPropuesta {
+  z-index: 10;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+
+  color: white;
+  font-size: xx-large;
+}
+
+.imagenPropuesta {
+  border-radius: 10px;
+  z-index: 11;
+  box-shadow: 2px 8px 16px 2px rgba(251, 255, 0, 0.2);
+}
+
+.imagenPropuesta:hover {
+  box-shadow: 0 15px 16px 0 rgba(229, 255, 0, 0.2);
+  transition: 1s;
+  opacity: 30%;
+}
 
 .carouselRecetas {
-  width: 75%;
+  width: 80%;
   margin: 0 auto;
-  margin-bottom: 100px; /* Ajusta el margen inferior para evitar que se corte el contenido */
+  padding-bottom: 100px;
+}
+
+@media screen and (max-width: 1280px) {
+  .propuestas {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  .propuestas > div {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .textoPropuesta {
+    font-size: x-large;
+  }
+}
+@media screen and (max-width: 480px) {
+  .propuestas {
+    display: grid;
+    grid-template-columns: 90%;
+  }
+  .propuestas > div {
+    width: 100%;
+  }
 }
 </style>

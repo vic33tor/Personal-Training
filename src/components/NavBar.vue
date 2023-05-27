@@ -6,7 +6,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <header class="fixed bottom-0 w-full">
+  <header class="fixed bottom-0 w-full bg-neutral-700">
     <div class="contenedorNav">
       <nav class="nav flex justify-center">
         <RouterLink
@@ -46,8 +46,9 @@ header {
 }
 
 .contenedorNav {
-  border: 1px solid white;
   font-size: small;
   padding: 10px 0 20px 0;
+  border-top: 1px solid white;
+  box-shadow: 10px 10px 10px 10px black;
 }
 </style>

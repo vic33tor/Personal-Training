@@ -10,7 +10,8 @@ import SignUp from "@/views/SignUp.vue";
 import MisRecetas from "@/views/MisRecetas.vue";
 import RecetaInfo from "../views/RecetaInfo.vue";
 import MisVarios from "../views/MisVarios.vue";
-
+import MisClases from "../views/MisClases.vue";
+import MisMonitores from "../views/MisMonitores.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,13 +69,27 @@ const router = createRouter({
       path: "/RecetaInfo",
       name: "RecetaInfo",
       component: RecetaInfo,
-      props: true
+      props: true,
     },
     {
-      path: "/Varios",
-      name: "Varios",
+      path: "/Servicios",
+      name: "Servicios",
       component: MisVarios,
-      props: true
+      props: true,
+      children: [
+        {
+          //Ahora el path no tiene un / al inicio
+          //ya que se añade al path de la ruta padre
+          path: "MisClases",
+          name: "MisClases",
+          component: MisClases,
+        },
+        {
+          path: "MisMonitores",
+          name: "MisMonitores",
+          component: MisMonitores,
+        },
+      ],
     },
   ],
 });
