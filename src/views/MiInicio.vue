@@ -29,7 +29,7 @@
           />
         </div>
         <div class="textoPropuesta">
-          <h1 class="">Entrenamientos personalizados</h1>
+          <h1 class="">Rutinas</h1>
         </div>
       </div>
 
@@ -186,7 +186,7 @@ const verRectas = () => {
 }
 
 .carouselRecetas {
-  width: 100%;
+  width: 80%;
   margin: 0 auto;
   padding-bottom: 100px;
 }
@@ -198,6 +198,11 @@ const verRectas = () => {
   }
   .propuestas > div {
     width: 100%;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .textoPropuesta {
+    font-size: x-large;
   }
 }
 @media screen and (max-width: 480px) {

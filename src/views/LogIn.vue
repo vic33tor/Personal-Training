@@ -1,20 +1,22 @@
 <template>
-  <div class="contenedor">
-    <form class="" @submit.prevent="">
-      <h1 class="">INICIA SESIÓN</h1>
-      <div class="inputCont">
-        <input class="" type="text" v-model="nombre" placeholder="Nombre" />
-      </div>
-      <div class="inputCont">
-        <input type="password" v-model="passwd" placeholder="Contraseña" />
-      </div>
-      <div class="botonera">
-        <button type="submit" class="log" @click="logIn">Log In</button>
-        <button class="registro" to="/Registro" @click="registro">
-          ¿No tienes cuenta?
-        </button>
-      </div>
-    </form>
+  <div class="h-screen">
+    <div class="contenedor">
+      <form class="" @submit.prevent="">
+        <h1 class="">INICIA SESIÓN</h1>
+        <div class="inputCont">
+          <input class="" type="text" v-model="nombre" placeholder="Nombre" />
+        </div>
+        <div class="inputCont">
+          <input type="password" v-model="passwd" placeholder="Contraseña" />
+        </div>
+        <div class="botonera">
+          <button type="submit" class="log" @click="logIn">Log In</button>
+          <button class="registro" to="/Registro" @click="registro">
+            ¿No tienes cuenta?
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -23,6 +25,7 @@ import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { onLogIn } from "../API/firebase";
 import { useDatosStore } from "@/stores/DatosForm";
+
 const datos = useDatosStore();
 
 let nombre = ref("");
@@ -35,6 +38,7 @@ const logIn = () => {
       if (doc.data().contrasena == passwd.value) {
         console.log(doc.id);
         datos.guardarUsuario(doc.id);
+        datos.guardarIsLogin(true);
         router.push({
           name: "Inicio",
           params: { name: doc.data().nombre },
