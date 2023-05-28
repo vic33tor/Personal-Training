@@ -43,6 +43,9 @@ export const onGetRutina = (ref, user_id, callback) => {
   );
 };
 
+export const onGetEjs = (ref, callback) =>
+  onSnapshot(collection(db, ref), callback);
+
 export const anade = (ref, el) => addDoc(collection(db, ref), el);
 
 export const registraUsuario = (ref, usuario) =>
