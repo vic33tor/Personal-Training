@@ -41,7 +41,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { ref } from "vue";
-import { registraUsuario, onLogIn } from "../API/firebase";
+import { registraUsuario, onLogIn, onGetRutina } from "../API/firebase";
 import { useDatosStore } from "@/stores/DatosForm";
 const datos = useDatosStore();
 
@@ -61,6 +61,13 @@ const registro = () => {
       datos.guardarUsuario(doc.id);
     });
   });
+  if (!datos.getRutina) {
+    onGetRutina("RUTINAS", datos.getUsuario, (docs) => {
+      docs.forEach((doc) => {
+        datos.guardarRutina(doc.id);
+      });
+    });
+  }
   router.push({
     name: "Inicio",
     params: { name: nombre.value },
