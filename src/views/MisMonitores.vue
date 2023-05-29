@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center mt-2 ">
+  <div class="text-center mt-2">
     <h1 class="text-white text-2xl">Contrata tu monitor</h1>
     <ul class="flex flex-col gap-6 w-fit justify-center">
       <li
@@ -7,21 +7,25 @@
         :key="item.id"
         class="border border-gray-300 rounded-lg p-4 flex items-center"
       >
-        <div class= "mr-4">
+        <div class="mr-4">
           <img
             src="../assets/Images/monitGym.jpg"
             alt="Imagen del monitor"
-            class="w-20 h-20 object-cover rounded-full"
+            class="w-40 h-20 object-cover rounded-full"
           />
         </div>
-        <div class="mr-4">
+        <div class="mr-4 text-center border-2 border-white w-full">
           <h1 class="text-xl text-white font-bold">{{ item.name }}</h1>
-          <p class="text-white">{{ item.especialidad }}</p>
+          <p class="text-white">Especialidad: {{ item.especialidad }}</p>
         </div>
         <div class="flex-grow"></div>
-        <button class="bg-yellow-300 rounded-sm px-4 py-2 hover:bg-yellow-500">
+        <button
+          @click="contrataMonitor(item.id)"
+          class="bg-yellow-300 rounded-sm px-4 py-2 hover:bg-yellow-500"
+        >
           Contratar
         </button>
+        {{ idMonitorActual }}
       </li>
     </ul>
   </div>
@@ -30,9 +34,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
 
-import { onDameReceta } from "../API/firebase";
+import { onDameReceta, onGetMonitorId, updateMonitorId } from "../API/firebase";
+import { useDatosStore } from "@/stores/DatosForm";
+
+const datos = useDatosStore();
 
 const monitores = ref([]);
+const idMonitorActual = ref("");
 
 onMounted(() => {
   dameMonitores();
@@ -46,8 +54,21 @@ const dameMonitores = () => {
     });
   });
 };
+
+const dameIdMonitor = () => {
+  onGetMonitorId("USUARIOS", datos.getUsuario, (docs) => {
+    docs.forEach((doc) => {
+      idMonitorActual.value = doc.data().monitorid;
+    });
+  });
+};
+
+const contrataMonitor = (monitorid) => {
+  dameIdMonitor();
+  if (idMonitorActual.value === "") {
+    updateMonitorId("USUARIOS", datos.getUsuario, { monitorid: monitorid });
+  }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -13,7 +13,6 @@ const isLog = computed(() => datos.getIsLogin);
 <template>
   <div class="app">
     <div v-if="isLog">
-      {{ isLogin }}
       <CabeceraPrincipal titulo="Just Fit" />
     </div>
     <RouterView />

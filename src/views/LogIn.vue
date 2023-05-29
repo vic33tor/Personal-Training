@@ -1,21 +1,24 @@
 <template>
-  <div class="h-screen">
-    <div class="contenedor">
-      <form class="" @submit.prevent="">
-        <h1 class="">INICIA SESIÓN</h1>
-        <div class="inputCont">
-          <input class="" type="text" v-model="nombre" placeholder="Nombre" />
-        </div>
-        <div class="inputCont">
-          <input type="password" v-model="passwd" placeholder="Contraseña" />
-        </div>
-        <div class="botonera">
-          <button type="submit" class="log" @click="logIn">Log In</button>
-          <button class="registro" to="/Registro" @click="registro">
-            ¿No tienes cuenta?
-          </button>
-        </div>
-      </form>
+  <div class="flex">
+    <img src="../assets/JustFitLogo.png" alt="" class="w-screen h-screen z-10"/>
+    <div class="z-20 absolute">
+      <div class="contenedor">
+        <form class="" @submit.prevent="">
+          <h1 class="">INICIA SESIÓN</h1>
+          <div class="inputCont">
+            <input class="" type="text" v-model="nombre" placeholder="Nombre" />
+          </div>
+          <div class="inputCont">
+            <input type="password" v-model="passwd" placeholder="Contraseña" />
+          </div>
+          <div class="botonera">
+            <button type="submit" class="log" @click="logIn">Log In</button>
+            <button class="registro" to="/Registro" @click="registro">
+              ¿No tienes cuenta?
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
