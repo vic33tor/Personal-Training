@@ -2,13 +2,13 @@
   <div class="container">
     <header class="header flex">
       <img
-        class="w-7/12 opacity-50 mt-5 ml-6"
-        src="../assets/images/3df7817728fa04eb106c782b2db0d71c-removebg-preview.png"
+        class="w-10/12 mt-5 opacity-90"
+        src="../assets/Images/portadaJustFit.png"
         alt=""
       />
-      <div class="z-10 top-28 text-center absolute mr-8">
+      <div class="text-center absolute ">
         <h1
-          class="text-white text-xl font-bold rounded-lg bg-stone-500 bg-opacity-30 p-3"
+          class="text-white text-xl font-bold rounded-lg bg-stone-500 p-3 bg-opacity-70"
         >
           ENTRENAMIENTOS A MEDIDA PARA ALCANZAR EL OBJETIVO QUE TÚ TE PROPONGAS
         </h1>
@@ -29,7 +29,7 @@
           />
         </div>
         <div class="textoPropuesta">
-          <h1 class="">Rutinas</h1>
+          <h1 class="">Rutinas personales</h1>
         </div>
       </div>
 
@@ -38,7 +38,7 @@
           <img src="../assets/Images/ClasesMedida.jpg" alt="" />
         </div>
         <div class="textoPropuesta">
-          <h1 class="">Apúntate a clases a medida</h1>
+          <h1 class="">Clases a medida</h1>
         </div>
       </div>
       <div class="elementoPropuesta">
@@ -46,7 +46,7 @@
           <img src="../assets/Images/monitGym.jpg" alt="" />
         </div>
         <div class="textoPropuesta">
-          <h1 class="">Monitores y clases</h1>
+          <h1 class="">Monitores</h1>
         </div>
       </div>
       <div class="elementoPropuesta">
