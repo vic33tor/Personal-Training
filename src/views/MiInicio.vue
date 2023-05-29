@@ -194,7 +194,7 @@ const verRectas = () => {
 @media screen and (max-width: 1280px) {
   .propuestas {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 49% 49%;
   }
   .propuestas > div {
     width: 100%;
