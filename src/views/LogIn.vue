@@ -23,7 +23,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { ref } from "vue";
-import { onLogIn } from "../API/firebase";
+import { onLogIn, onGetRutina } from "../API/firebase";
 import { useDatosStore } from "@/stores/DatosForm";
 
 const datos = useDatosStore();
@@ -48,6 +48,13 @@ const logIn = () => {
       }
     });
   });
+  if (!datos.getRutina) {
+    onGetRutina("RUTINAS", datos.getUsuario, (docs) => {
+      docs.forEach((doc) => {
+        datos.guardarRutina(doc.id);
+      });
+    });
+  }
 };
 
 const registro = () => {
