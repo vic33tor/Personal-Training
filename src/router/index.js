@@ -76,20 +76,18 @@ const router = createRouter({
       name: "Servicios",
       component: MisVarios,
       props: true,
-      children: [
-        {
-          //Ahora el path no tiene un / al inicio
-          //ya que se añade al path de la ruta padre
-          path: "MisClases",
-          name: "MisClases",
-          component: MisClases,
-        },
-        {
-          path: "MisMonitores",
-          name: "MisMonitores",
-          component: MisMonitores,
-        },
-      ],
+    },
+    {
+      //Ahora el path no tiene un / al inicio
+      //ya que se añade al path de la ruta padre
+      path: "/MisClases",
+      name: "MisClases",
+      component: MisClases,
+    },
+    {
+      path: "/MisMonitores",
+      name: "MisMonitores",
+      component: MisMonitores,
     },
   ],
 });
