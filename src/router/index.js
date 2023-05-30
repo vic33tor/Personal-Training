@@ -75,7 +75,6 @@ const router = createRouter({
       path: "/Servicios",
       name: "Servicios",
       component: MisVarios,
-      props: true,
     },
     {
       //Ahora el path no tiene un / al inicio

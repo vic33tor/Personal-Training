@@ -3,11 +3,13 @@
     <h1 class="solo">Nuestras</h1>
     <h1 class="name">recetas fit</h1>
   </div>
-  <ul v-for="item in recetas" :key="item.id">
-    <div class="recetasContainer">
+  <div class="recetasContainer">
+    <ul v-for="item in recetas" :key="item.id">
       <li class="receta" @click="verUnaReceta(item.id)">
-        <div class="imagenReceta">
-          <img :src="item.Img" alt="" />
+        <div class="rounded-lg flex mr-3">
+          <div class="w-fit">
+            <img :src="item.Img" alt="" />
+          </div>
         </div>
         <div class="contenidoReceta">
           <div class="w-full bg-slate-500 rounded-sm">
@@ -16,8 +18,8 @@
           <h2>{{ item.ShortDesc }}</h2>
         </div>
       </li>
-    </div>
-  </ul>
+    </ul>
+  </div>
 </template>
 
 <script setup>
@@ -50,19 +52,26 @@ const verUnaReceta = (id) => {
 </script>
 
 <style coped>
+li {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 .recetasContainer {
   margin: 0 auto;
   align-items: center;
   text-align: center;
   justify-content: center;
-  width: 80%;
+  width: 70%;
   margin-top: 16px;
   margin-bottom: 16px;
+  min-height: 1250px;
+
 }
 
 .receta {
-  height: 100px;
+  height: fit-content;
   border: solid 1px white;
+  padding: 6px;
   box-shadow: 0 4px 8px 0 rgba(162, 255, 0, 0.2);
   transition: 0.3s;
   color: white;
@@ -74,12 +83,6 @@ const verUnaReceta = (id) => {
 .receta:hover {
   box-shadow: 0 15px 16px 0 rgba(229, 255, 0, 0.2);
   transform: scale(1.02);
-}
-
-.imagenReceta {
-  border-radius: 10%;
-  height: 260px;
-  width: 260px;
 }
 
 .contenidoReceta {
