@@ -1,6 +1,10 @@
 <template>
   <div class="flex">
-    <img src="../assets/JustFitLogo.png" alt="" class="w-screen h-screen z-10"/>
+    <img
+      src="../assets/JustFitLogo.png"
+      alt=""
+      class="w-screen h-screen z-10"
+    />
     <div class="z-20 absolute">
       <div class="contenedor">
         <form class="" @submit.prevent="">
@@ -44,7 +48,6 @@ const logIn = () => {
         datos.guardarIsLogin(true);
         router.push({
           name: "Inicio",
-          params: { name: doc.data().nombre },
         });
       } else {
         alert("Nombre o contraseña incorrectos");

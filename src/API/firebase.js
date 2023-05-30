@@ -61,11 +61,11 @@ export const onGetMonitorId = (ref, user_id, callback) => {
   onSnapshot(
     query(collection(db, ref), where("user_id", "==", user_id)),
     callback
-  )
+  );
 };
 
 export const updateMonitorId = (ref, id, objeto) =>
   updateDoc(doc(db, ref, id), objeto);
 
-
-
+export const onGetClases = (ref, callback) =>
+  onSnapshot(collection(db, ref), callback);

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="bg-stone-200 rounded-lg p-4">
       <div class="flex flex-col items-center">
-        <div class="h-56 overflow-hidden mb-2 rounded-t-lg">
+        <div class="h-56 overflow-hidden mb-2 rounded-lg">
           <img
             src="../assets/Images/fitness-1440x900.jpg"
             alt="Imagen de clases"
@@ -25,7 +25,7 @@
     </div>
     <div class="bg-stone-200 rounded-lg p-4">
       <div class="flex flex-col items-center">
-        <div class="h-56 overflow-hidden mb-2 rounded-t-lg">
+        <div class="h-56 overflow-hidden mb-2 rounded-lg">
           <img
             src="../assets/Images/monitorGym2.jpg"
             alt="Imagen de monitores"
@@ -64,6 +64,7 @@ const routes = ["MisClases", "MisMonitores"];
   align-items: center;
   display: flex;
   gap: 8px;
+  margin-top: 2em;
 }
 @media screen and (max-width: 778px) {
   .container {

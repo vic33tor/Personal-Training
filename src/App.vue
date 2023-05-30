@@ -27,5 +27,6 @@ const isLog = computed(() => datos.getIsLogin);
 <style scoped>
 .app {
   background-color: rgb(63, 63, 63);
+
 }
 </style>
