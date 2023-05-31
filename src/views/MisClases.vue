@@ -1,34 +1,36 @@
 <template>
   <div class="text-center text-white text-2xl mt-2">
-    <h1>Clases grupales</h1>
-    <select v-model="opciones" class="mt-2 text-black">
-      <option value="">Todos</option>
+    <div class="contenedor text-center mt-2">
+      <div class="textoInicio flex gap-3">
+        <h1 class="name text-white text-3xl pt-2 mb-2">Clases</h1>
+        <h1 class="text-white text-3xl pt-2 mb-2">grupales</h1>
+      </div>
+    </div>
+
+    <select v-model="opciones" class="mt-2 text-black rounded-md">
+      <option value="">Todas</option>
       <option value="contacto">Deportes de contacto</option>
       <option value="baile">Baile</option>
       <option value="yoga">Yoga</option>
       <!-- Agrega las opciones que necesites -->
     </select>
-    <ul class="estilosLista gap-3">
+    <ul class="estilosLista ">
       <li
         v-for="item in clasesFiltro"
         :key="item.id"
-        class="border border-gray-300 rounded-lg p-4 flex flex-col items-center"
+        class="rounded-lg p-4 flex flex-col items-center"
+        @click="verClase(item.id)"
       >
-        <div class="mr-4">
+        <div class="opacity-75">
           <img
             src="../assets/Images/monitGym.jpg"
             alt="Imagen del monitor"
-            class="w-40 h-20 object-cover rounded-full"
+            class="z-10 rounded-lg"
           />
         </div>
-        <div class="mr-4 text-center border-2 border-white w-full">
-          <h1 class="text-xl text-white font-bold">{{ item.nombre }}</h1>
-          <p class="text-white">{{ item.desc }}</p>
+        <div class="contenedorNombre z-11 relative bottom-2/4">
+          <h1 class="text-3xl text-white font-bold">{{ item.nombre }}</h1>
         </div>
-
-        <button class="bg-yellow-300 rounded-sm px-4 py-2 hover:bg-yellow-500">
-          Contratar
-        </button>
       </li>
     </ul>
   </div>
@@ -37,13 +39,23 @@
 <script setup>
 import { onGetClases } from "../API/firebase";
 import { onMounted, ref, computed } from "vue";
+import { useRouter } from "vue-router";
 
 const misClases = ref([]);
 const opciones = ref("");
+const router = useRouter()
 
 onMounted(() => {
   dameClases();
 });
+
+const verClase = (id) => {
+  router.push({
+    name: "InfoClase",
+    query: { id },
+  });
+};
+
 
 const dameClases = () => {
   misClases.value = [];
@@ -66,8 +78,27 @@ const clasesFiltro = computed(() => {
 </script>
 
 <style scoped>
+.contenedorNombre {
+  margin: 0 auto;
+}
 .estilosLista {
+  place-content: center;
   display: grid;
-  grid-template-columns: 49% 49%;
+  grid-template-columns: 25% 25%;
+}
+
+.textoInicio {
+  place-content: center;
+}
+
+.name {
+  color: yellow;
+}
+@media screen and (max-width: 925px) {
+  .estilosLista {
+    place-content: center;
+    display: grid;
+    grid-template-columns: 75%;
+  }
 }
 </style>

@@ -42,7 +42,8 @@ header {
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 9999; /* Ajusta este valor según sea necesario */
+  z-index: 10;
+  /* z-index: 9999; /* Ajusta este valor según sea necesario */
 }
 
 .contenedorNav {

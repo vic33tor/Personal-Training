@@ -15,7 +15,9 @@ const isLog = computed(() => datos.getIsLogin);
     <div v-if="isLog">
       <CabeceraPrincipal titulo="Just Fit" />
     </div>
+
     <RouterView />
+
     <div class="basis-1/5" v-if="isLog">
       <NavBar
         :links="['Inicio', 'Rutina', 'Ejercicios', 'Progreso', 'Servicios']"
@@ -27,6 +29,5 @@ const isLog = computed(() => datos.getIsLogin);
 <style scoped>
 .app {
   background-color: rgb(63, 63, 63);
-
 }
 </style>
