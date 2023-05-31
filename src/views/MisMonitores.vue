@@ -1,28 +1,34 @@
 <template>
-  <div class="text-center mt-2">
-    <h1 class="text-white text-2xl">Contrata tu monitor</h1>
+  <div class="contenedor text-center mt-2">
+    <div class="textoInicio flex gap-3">
+      <h1 class="text-white text-3xl pt-2 mb-2">Nuestros</h1>
+      <h1 class="name text-white text-3xl pt-2 mb-2">monitores</h1>
+    </div>
     <div class="containerLista">
-      <ul class="flex flex-col gap-6 w-fit justify-center">
+      <ul class="flex flex-col w-fit justify-center">
         <li
           v-for="item in monitores"
           :key="item.id"
-          class="border border-gray-300 rounded-lg p-4 flex items-center w-1/2"
+          class="monitor border border-gray-300 rounded-lg p-4 flex items-center w-1/2 bg-slate-700"
         >
-          <div class="mr-4">
+          <div class="ml-2">
             <img
-              src="../assets/Images/monitGym.jpg"
+              :src="item.img"
               alt="Imagen del monitor"
               class="w-40 h-20 object-cover rounded-full"
             />
           </div>
-          <div class="mr-4 text-center border-2 border-white w-full">
+          <div
+            class="text-center w-full cursor-pointer"
+            @click="verMonitor(item.id)"
+          >
             <h1 class="text-xl text-white font-bold">{{ item.name }}</h1>
             <p class="text-white">Especialidad: {{ item.especialidad }}</p>
           </div>
-          <div class="flex-grow"></div>
+
           <button
             @click="contrataMonitor(item.id)"
-            class="bg-yellow-300 rounded-sm px-4 py-2 hover:bg-yellow-500"
+            class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-500 mr-2 text-black"
           >
             Contratar
           </button>
@@ -54,6 +60,13 @@ const dameMonitores = () => {
     docs.forEach((doc) => {
       monitores.value.push({ id: doc.id, ...doc.data() });
     });
+  });
+};
+
+const verMonitor = (id) => {
+  router.push({
+    name: "InfoMonitor",
+    query: { id },
   });
 };
 
@@ -90,5 +103,27 @@ ul {
   place-content: center;
   place-items: center;
   width: 100%;
+}
+
+.textoInicio {
+  place-content: center;
+}
+.monitor {
+  height: fit-content;
+  border: solid 1px white;
+  padding: 6px;
+  box-shadow: 0 4px 8px 0 rgba(162, 255, 0, 0.2);
+  transition: 0.3s;
+  color: white;
+  border-radius: 10px;
+}
+
+.monitor:hover {
+  box-shadow: 0 15px 16px 0 rgba(229, 255, 0, 0.2);
+  transform: scale(1.02);
+}
+
+.name {
+  color: yellow;
 }
 </style>

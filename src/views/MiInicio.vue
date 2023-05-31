@@ -162,7 +162,7 @@ const verRectas = () => {
 }
 
 .textoPropuesta {
-  z-index: 10;
+  z-index: 9;
   position: absolute;
   display: flex;
   justify-content: center;
@@ -175,7 +175,7 @@ const verRectas = () => {
 
 .imagenPropuesta {
   border-radius: 10px;
-  z-index: 11;
+  z-index: 10;
   box-shadow: 2px 8px 16px 2px rgba(251, 255, 0, 0.2);
 }
 
