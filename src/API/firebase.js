@@ -12,7 +12,9 @@ import {
   doc,
   updateDoc,
   deleteDoc,
+  arrayUnion,
 } from "firebase/firestore";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
@@ -69,3 +71,17 @@ export const updateMonitorId = (ref, id, objeto) =>
 
 export const onGetClases = (ref, callback) =>
   onSnapshot(collection(db, ref), callback);
+
+export const getUnaClase = (ref, id_clase, callback) => {
+  onSnapshot(
+    query(collection(db, ref), where("user_id", "==", id_clase)),
+    callback
+  );
+};
+
+export const updateClasesContratadas = (ref, id, objeto) => {
+  const docRef = doc(db, ref, id);
+  return updateDoc(docRef, {
+    clases: arrayUnion(objeto),
+  });
+};

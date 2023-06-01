@@ -14,18 +14,18 @@
       <option value="yoga">Yoga</option>
       <!-- Agrega las opciones que necesites -->
     </select>
-    <ul class="estilosLista ">
+    <ul class="estilosLista">
       <li
         v-for="item in clasesFiltro"
         :key="item.id"
-        class="rounded-lg p-4 flex flex-col items-center"
+        class=""
         @click="verClase(item.id)"
       >
-        <div class="opacity-75">
+        <div class="imagen opacity-75 hover:opacity-50">
           <img
-            src="../assets/Images/monitGym.jpg"
+            :src="item.img"
             alt="Imagen del monitor"
-            class="z-10 rounded-lg"
+            class="item z-10 rounded-lg"
           />
         </div>
         <div class="contenedorNombre z-11 relative bottom-2/4">
@@ -43,7 +43,7 @@ import { useRouter } from "vue-router";
 
 const misClases = ref([]);
 const opciones = ref("");
-const router = useRouter()
+const router = useRouter();
 
 onMounted(() => {
   dameClases();
@@ -55,7 +55,6 @@ const verClase = (id) => {
     query: { id },
   });
 };
-
 
 const dameClases = () => {
   misClases.value = [];
@@ -84,7 +83,10 @@ const clasesFiltro = computed(() => {
 .estilosLista {
   place-content: center;
   display: grid;
-  grid-template-columns: 25% 25%;
+  grid-template-columns: 50% 50%;
+  width: 50%;
+  margin: 0 auto;
+  gap: 10px;
 }
 
 .textoInicio {
@@ -94,11 +96,26 @@ const clasesFiltro = computed(() => {
 .name {
   color: yellow;
 }
+
+.item {
+  height: 200px;
+}
+
+.imagen {
+  transition: 0.3s;
+}
+
+.imagen:hover {
+  box-shadow: 0 15px 16px 0 rgba(229, 255, 0, 0.2);
+  transform: scale(1.02);
+}
 @media screen and (max-width: 925px) {
   .estilosLista {
-    place-content: center;
-    display: grid;
-    grid-template-columns: 75%;
+    display: flex;
+    flex-direction: column;
+  }
+  .item {
+    width: 2/4;
   }
 }
 </style>
