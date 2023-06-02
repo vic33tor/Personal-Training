@@ -33,7 +33,7 @@ export const db = getFirestore(app);
 
 export const onLogIn = (ref, valorNombre, callback) => {
   onSnapshot(
-    query(collection(db, ref), where("nombre", "==", valorNombre)),
+    query(collection(db, ref), where("email", "==", valorNombre)),
     callback
   );
 };

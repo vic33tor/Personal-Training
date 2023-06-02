@@ -2,12 +2,23 @@
 import { RouterView } from "vue-router";
 import NavBar from "./components/NavBar.vue";
 import CabeceraPrincipal from "@/components/CabeceraPrincipal.vue";
-import { computed, ref } from "vue";
+import { ref, onMounted } from "vue";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import { useDatosStore } from "@/stores/DatosForm";
+const isLog = ref(false);
 
-const datos = useDatosStore();
-const isLog = computed(() => datos.getIsLogin);
+let auth;
+
+onMounted(() => {
+  auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      isLog.value = true;
+    } else {
+      isLog.value = false;
+    }
+  });
+});
 </script>
 
 <template>

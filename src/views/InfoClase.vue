@@ -6,22 +6,11 @@
     <div class="contenedorTitulo p-6 mb-6">
       <div>
         <h2 class="text-xl font-semibold">{{ claseActual.nombre }}</h2>
-        <p class="text-gray-500 mt-1">Duración: {{ claseActual.duracion }}</p>
+
         <p class="text-gray-500 mt-1">
           Hora: {{ claseActual.horaInicio }}-{{ claseActual.horaFin }}
         </p>
-        <p class="text-gray-500 mt-1">
-          Selecciona el día que quieres asistir:
-          <select name="" id="" v-model="seleccionDia">
-            <option
-              v-for="(item, idx) in claseActual.dias"
-              :key="idx"
-              :value="item"
-            >
-              {{ item }}
-            </option>
-          </select>
-        </p>
+        <p class="text-gray-500 mt-1">Días: {{ diasClase }}</p>
       </div>
       <div></div>
     </div>
@@ -41,14 +30,33 @@
 import { onMounted, ref } from "vue";
 
 import { onDameReceta, updateClasesContratadas } from "../API/firebase";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useDatosStore } from "@/stores/DatosForm";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+const asistirClase = (claseActual) => {
+  const auth = getAuth();
+
+  // Verifica si el usuario está autenticado antes de continuar
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      updateClasesContratadas("USUARIOS", datos.getUsuario, {
+        nombre: claseActual.nombre,
+        dias: claseActual.dias,
+        inicio: claseActual.horaInicio,
+        fin: claseActual.horaFin,
+      });
+    } else {
+      console.log("Usuario no autenticado");
+    }
+  });
+};
 
 const datos = useDatosStore();
 const route = useRoute();
+const router = useRouter();
 const claseActual = ref([]);
-const clasesAsignadas = ref([]);
-const seleccionDia = ref("");
+let diasClase = ref("");
 
 onMounted(() => {
   dameClase(route.query.id);
@@ -59,17 +67,9 @@ const dameClase = (id) => {
     docs.forEach((doc) => {
       if (doc.id === id) {
         claseActual.value = { id: doc.id, ...doc.data() };
+        diasClase.value = claseActual.value.dias.join(" y ");
       }
     });
-  });
-};
-
-const asistirClase = (claseActual) => {
-  updateClasesContratadas("USUARIOS", datos.getUsuario, {
-    nombre: claseActual.nombre,
-    dia: seleccionDia.value,
-    inicio: claseActual.horaInicio,
-    fin: claseActual.horaFin,
   });
 };
 </script>

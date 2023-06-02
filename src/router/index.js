@@ -6,7 +6,7 @@ import MiProgreso from "@/views/MiProgreso.vue";
 import VerRutina from "@/views/VerRutina.vue";
 import CreaRutina from "@/views/CreaRutina.vue";
 import LogIn from "@/views/LogIn.vue";
-import SignUp from "@/views/SignUp.vue";
+
 import MisRecetas from "@/views/MisRecetas.vue";
 import RecetaInfo from "../views/RecetaInfo.vue";
 import MisVarios from "../views/MisVarios.vue";
@@ -14,6 +14,7 @@ import MisClases from "../views/MisClases.vue";
 import MisMonitores from "../views/MisMonitores.vue";
 import InfoMonitor from "../views/InfoMonitor.vue";
 import InfoClase from "../views/InfoClase.vue";
+
 
 
 const router = createRouter({
@@ -25,14 +26,12 @@ const router = createRouter({
       component: LogIn,
     },
     {
-      path: "/Resgistrase",
-      name: "SignUp",
-      component: SignUp,
-    },
-    {
       path: "/home",
       name: "Inicio",
       component: MiInicio,
+      meta:{
+        retquiresAuth:true,
+      }
     },
     {
       path: "/Rutina",
@@ -80,8 +79,6 @@ const router = createRouter({
       component: MisVarios,
     },
     {
-      //Ahora el path no tiene un / al inicio
-      //ya que se añade al path de la ruta padre
       path: "/MisClases",
       name: "MisClases",
       component: MisClases,
@@ -105,5 +102,6 @@ const router = createRouter({
     },
   ],
 });
+
 
 export default router;

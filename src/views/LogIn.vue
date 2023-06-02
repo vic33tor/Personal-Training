@@ -1,81 +1,215 @@
 <template>
-  <div class="flex">
-    <img
-      src="../assets/JustFitLogo.png"
-      alt=""
-      class="w-screen h-screen z-10"
-    />
-    <div class="z-20 absolute">
-      <div class="contenedor">
+  <div class="contenedorPrincipal">
+    <Transition>
+      <div class="contenedor" v-if="mostrarRegistro === false">
         <form class="" @submit.prevent="">
           <h1 class="">INICIA SESIÓN</h1>
           <div class="inputCont">
-            <input class="" type="text" v-model="nombre" placeholder="Nombre" />
+            <input class="" type="text" v-model="email" placeholder="Email" />
           </div>
           <div class="inputCont">
             <input type="password" v-model="passwd" placeholder="Contraseña" />
           </div>
           <div class="botonera">
             <button type="submit" class="log" @click="logIn">Log In</button>
-            <button class="registro" to="/Registro" @click="registro">
+            <button
+              class="bg-slate-200 p-0.5 rounded-md"
+              @click="LogInWithGoogle"
+            >
+              Log in con Google
+            </button>
+            <button class="registro" @click="mostrarRegistro = true">
               ¿No tienes cuenta?
             </button>
           </div>
         </form>
       </div>
-    </div>
+    </Transition>
+    <Transition>
+      <div class="contenedorRegistro" v-if="mostrarRegistro">
+        <form class="" @submit.prevent="">
+          <h1 class="">Registro</h1>
+          <div class="inputCont">
+            <input
+              class=""
+              type="text"
+              v-model="email"
+              placeholder="Email"
+              title="Email"
+            />
+          </div>
+          <div class="inputCont">
+            <input
+              type="password"
+              v-model="passwd"
+              placeholder="Contraseña"
+              title="Contraseña"
+            />
+          </div>
+          <div class="botonera">
+            <button type="submit" class="log" @click="registro()">
+              Terminar
+            </button>
+          </div>
+          <div class="botonera">
+            <button
+              type="submit"
+              @click="signInWithGoogle"
+              class="bg-slate-200 p-0.5 rounded-md"
+            >
+              Regístrate con Google
+            </button>
+          </div>
+          <div class="botonera">
+            <button
+              type="submit"
+              @click="mostrarRegistro = false"
+              class="registro"
+            >
+              Iniciar sesión con mi cuenta
+            </button>
+          </div>
+        </form>
+      </div>
+    </Transition>
   </div>
 </template>
 
 <script setup>
 import { useRouter } from "vue-router";
 import { ref } from "vue";
-import { onLogIn, onGetRutina } from "../API/firebase";
+import { onLogIn, onGetRutina, registraUsuario } from "../API/firebase";
 import { useDatosStore } from "@/stores/DatosForm";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 const datos = useDatosStore();
 
-let nombre = ref("");
+let email = ref("");
 let passwd = ref("");
 const router = useRouter();
 
+const mostrarRegistro = ref(false);
+
 const logIn = () => {
-  onLogIn("USUARIOS", nombre.value, (docs) => {
-    docs.forEach((doc) => {
-      if (doc.data().contrasena == passwd.value) {
-        console.log(doc.id);
-        datos.guardarUsuario(doc.id);
-        datos.guardarIsLogin(true);
-        if (!datos.getRutina) {
-          onGetRutina("RUTINAS", datos.getUsuario, (docs) => {
-            docs.forEach((doc) => {
-              datos.guardarRutina(doc.id);
-            });
-          });
-        }
-        router.push({
-          name: "Inicio",
+
+  const auth = getAuth();
+
+  signInWithEmailAndPassword(auth, email.value, passwd.value)
+    .then((data) => {
+      alert("signIn");
+      console.log("signIn");
+      console.log(auth.currentUser);
+      onLogIn("USUARIOS", email.value, (docs) => {
+        docs.forEach((doc) => {
+          console.log(doc.id);
+          datos.guardarUsuario(doc.id);
+          datos.guardarIsLogin(true);
         });
-      } else {
-        alert("Nombre o contraseña incorrectos");
+      });
+      if (!datos.getRutina) {
+        onGetRutina("RUTINAS", datos.getUsuario, (docs) => {
+          docs.forEach((doc) => {
+            datos.guardarRutina(doc.id);
+          });
+
+        });
       }
+      router.push({
+        name: "Inicio",
+      });
+    })
+
+    .catch((error) => {
+      alert(error);
+    });
+};
+
+const LogInWithGoogle = () => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(getAuth(), provider).then((result) => {
+    console.log(result.user.reloadUserInfo.email);
+    onLogIn("USUARIOS", result.user.reloadUserInfo.email, (docs) => {
+      docs.forEach((doc) => {
+        datos.guardarUsuario(doc.id);
+      });
+      router.push({
+        name: "Inicio",
+      });
     });
   });
 };
 
 const registro = () => {
-  router.push({
-    name: "SignUp",
+  const auth = getAuth();
+
+  createUserWithEmailAndPassword(auth, email.value, passwd.value)
+    .then((data) => {
+      alert("Registrado");
+      console.log("Registrado");
+
+      console.log(auth.currentUser);
+      registraUsuario("USUARIOS", {
+        email: email.value,
+      });
+      onLogIn("USUARIOS", email.value, (docs) => {
+        docs.forEach((doc) => {
+          datos.guardarUsuario(doc.id);
+        });
+      });
+      router.push({
+        name: "Inicio",
+        params: { email: email.value },
+      });
+    })
+    .catch((error) => {
+      alert("Error");
+      console.log(error);
+    });
+};
+
+const signInWithGoogle = () => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(getAuth(), provider).then((result) => {
+    console.log(result.user.reloadUserInfo.email);
+    registraUsuario("USUARIOS", {
+      email: result.user.reloadUserInfo.email,
+    });
+    onLogIn("USUARIOS", email.value, (docs) => {
+      docs.forEach((doc) => {
+        datos.guardarUsuario(doc.id);
+      });
+      router.push({
+        name: "Inicio",
+      });
+    });
   });
 };
 </script>
 
 <style scoped>
+.contenedorPrincipal {
+  background-image: url("../assets/JustFitLogo.png");
+  height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
 * {
   margin: 0 auto;
 }
 .contenedor {
-  position: relative;
+  left: 15%;
+  top: 25%;
+  position: absolute;
   text-align: center;
   width: 380px;
   height: 380px;
@@ -137,6 +271,30 @@ form > h1 {
   margin-top: 0.75em;
   font-size: xx-large;
 }
+.contenedorRegistro {
+  right: 15%;
+  top: 25%;
+  position: absolute;
+  text-align: center;
+  width: 380px;
+  height: 380px;
+  border-radius: 5px;
+  background: gray;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2em;
+  opacity: 100%;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 
 .inputCont {
   position: relative;
@@ -161,7 +319,6 @@ input {
   background-color: #d3e213;
   padding: 5px;
   border-radius: 6px;
-  width: 60px;
   margin-bottom: 0.5em;
 }
 
