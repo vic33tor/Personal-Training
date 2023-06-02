@@ -1,7 +1,18 @@
 <template>
   <div>
+    <div class="text-center text-white text-2xl mt-2">
+      <select v-model="opciones" class="mt-2 text-black rounded-md">
+        <option value="">Todos</option>
+        <option value="Biceps">Biceps</option>
+        <option value="Espalda">Espalda</option>
+        <option value="Hombro">Hombro</option>
+        <option value="Pecho">Pecho</option>
+        <option value="Pierna">Pierna</option>
+        <option value="Triceps">Triceps</option>
+      </select>
+    </div>
     <ul>
-      <li v-for="(ejercicio, idx) in ejercicios" :key="idx">
+      <li v-for="(ejercicio, idx) in ejsFiltro" :key="idx">
         <div>
           <span id="músculo">{{ ejercicio.id }}</span>
           <div>
@@ -13,10 +24,10 @@
               >
                 <p>{{ ej.Nombre }}</p>
                 <p>{{ ej.Enfoque }}</p>
-                <div v-if="!textoEj">
+                <div class="imagenEjercicios">
                   <img :src="ej.Img" alt="" />
                 </div>
-                <div v-if="textoEj">
+                <div class="textoEjercicios">
                   {{ ej.Descripción }}
                 </div>
               </li>
@@ -29,15 +40,24 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { onGetEjs } from "@/API/firebase";
 let ejercicios = ref([]);
-let textoEj = ref(false);
+const opciones = ref("");
 onGetEjs("EJERCICIOS", (docs) => {
   ejercicios.value = [];
   docs.forEach((doc) => {
     ejercicios.value.push({ id: doc.id, data: doc.data() });
   });
+});
+const ejsFiltro = computed(() => {
+  if (!opciones.value) {
+    return ejercicios.value;
+  } else {
+    return ejercicios.value.filter((x) => {
+      return x.id === opciones.value;
+    });
+  }
 });
 </script>
 
@@ -52,11 +72,17 @@ onGetEjs("EJERCICIOS", (docs) => {
   grid-template-columns: 50% 50%;
 }
 .elementoEjercicios {
+  transition: 0.3s;
   padding: 10px;
+  color: white;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.elementoEjercicios:hover {
+  transform: scale(1.01);
 }
 .elementoEjercicios > div {
   display: flex;
@@ -68,6 +94,22 @@ onGetEjs("EJERCICIOS", (docs) => {
 .elementoEjercicios > div > img {
   width: 100%;
   height: 100%;
+}
+.textoEjercicios {
+  z-index: 9;
+  position: absolute;
+}
+
+.imagenEjercicios {
+  border-radius: 10px;
+  z-index: 10;
+  box-shadow: 2px 8px 16px 2px rgba(251, 255, 0, 0.2);
+}
+
+.imagenEjercicios:hover {
+  box-shadow: 0 15px 16px 0 rgba(229, 255, 0, 0.2);
+  transition: 1s;
+  opacity: 10%;
 }
 
 @media screen and (max-width: 480px) {

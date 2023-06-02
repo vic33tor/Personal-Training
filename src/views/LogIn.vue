@@ -46,6 +46,13 @@ const logIn = () => {
         console.log(doc.id);
         datos.guardarUsuario(doc.id);
         datos.guardarIsLogin(true);
+        if (!datos.getRutina) {
+          onGetRutina("RUTINAS", datos.getUsuario, (docs) => {
+            docs.forEach((doc) => {
+              datos.guardarRutina(doc.id);
+            });
+          });
+        }
         router.push({
           name: "Inicio",
         });
@@ -54,13 +61,6 @@ const logIn = () => {
       }
     });
   });
-  if (!datos.getRutina) {
-    onGetRutina("RUTINAS", datos.getUsuario, (docs) => {
-      docs.forEach((doc) => {
-        datos.guardarRutina(doc.id);
-      });
-    });
-  }
 };
 
 const registro = () => {
