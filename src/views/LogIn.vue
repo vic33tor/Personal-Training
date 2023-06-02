@@ -97,6 +97,7 @@ const router = useRouter();
 const mostrarRegistro = ref(false);
 
 const logIn = () => {
+
   const auth = getAuth();
 
   signInWithEmailAndPassword(auth, email.value, passwd.value)
@@ -116,6 +117,7 @@ const logIn = () => {
           docs.forEach((doc) => {
             datos.guardarRutina(doc.id);
           });
+
         });
       }
       router.push({
