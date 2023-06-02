@@ -97,7 +97,6 @@ const router = useRouter();
 const mostrarRegistro = ref(false);
 
 const logIn = () => {
-
   const auth = getAuth();
 
   signInWithEmailAndPassword(auth, email.value, passwd.value)
@@ -117,7 +116,6 @@ const logIn = () => {
           docs.forEach((doc) => {
             datos.guardarRutina(doc.id);
           });
-
         });
       }
       router.push({
@@ -180,8 +178,9 @@ const signInWithGoogle = () => {
     registraUsuario("USUARIOS", {
       email: result.user.reloadUserInfo.email,
     });
-    onLogIn("USUARIOS", email.value, (docs) => {
+    onLogIn("USUARIOS", result.user.reloadUserInfo.email, (docs) => {
       docs.forEach((doc) => {
+        console.log(doc.id);
         datos.guardarUsuario(doc.id);
       });
       router.push({

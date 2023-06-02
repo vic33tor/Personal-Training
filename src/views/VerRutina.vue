@@ -13,13 +13,18 @@
       </select>
     </div>
     <ul>
+      {{
+        opciones
+      }}
       <li v-for="(dia, idx) in rutinaFiltro" :key="idx">
         <div v-if="Object.prototype.toString.call(dia) === `[object Object]`">
-          {{ Object.keys(dia) }}
           {{ dia }}
         </div>
         <div v-else>
           <ul>
+            {{
+              idx
+            }}
             <li v-for="(ej, idx) in dia" :key="idx">
               {{ ej }}
             </li>
@@ -52,10 +57,12 @@ const rutinaFiltro = computed(() => {
     return miRutina.value[0];
   } else {
     const claves = Object.keys(miRutina.value[0]);
+    console.log(miRutina.value[0]);
+    console.log(claves);
     if (claves.includes(opciones.value)) {
       return miRutina.value[0][opciones.value];
     } else {
-      return ["Descanso"];
+      return "Descanso";
     }
   }
 });
