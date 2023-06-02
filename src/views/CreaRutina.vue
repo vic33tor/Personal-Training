@@ -32,7 +32,7 @@
         </li>
       </ul>
       <h1>Dia de la semana</h1>
-      <select class="p-1 mb-4">
+      <select v-model="opciones" class="p-1 mb-4">
         <option>Lunes</option>
         <option>Martes</option>
         <option>Miercoles</option>
@@ -53,9 +53,10 @@ import { ref, onMounted } from "vue";
 import { anade, updateRutina, onGetRutina } from "@/API/firebase";
 import { useDatosStore } from "@/stores/DatosForm";
 const datos = useDatosStore();
+const opciones = ref("");
 onMounted(async () => {
   if (!datos.getRutina) {
-    console.log(datos.getUsuario)
+    console.log(datos.getUsuario);
     anade("RUTINAS", { user_id: datos.getUsuario });
     onGetRutina("RUTINAS", datos.getUsuario, (docs) => {
       docs.forEach((doc) => {
@@ -75,8 +76,9 @@ const anhadirDia = () => {
     const serie = series.value[i];
     rutina.push({ nombre: nombre, series: serie });
   }
+  rutina.push({ nombre_dia: nombre_musculo.value });
   updateRutina("RUTINAS", datos.getRutina, {
-    Lunes: rutina
+    [opciones.value]: rutina,
   });
 };
 </script>
