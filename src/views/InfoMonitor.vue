@@ -63,7 +63,7 @@ const contrataMonitor = (monitorid) => {
   if (idMonitorActual.value != "") {
     if (
       confirm(
-        "ya tiene un monitor contratado, ¿desea sustituir su monitor actual por el seleccionado actualmente?"
+        "Si ya tiene un monitor contratado, este se sustituirá: ¿desea continuar?"
       ) === true
     ) {
       updateMonitorId("USUARIOS", datos.getUsuario, { monitorid: monitorid });
