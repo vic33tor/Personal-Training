@@ -85,3 +85,14 @@ export const updateClasesContratadas = (ref, id, objeto) => {
     clases: arrayUnion(objeto),
   });
 };
+
+export const onGetProgreso = (ref, email, callback) => {
+  onSnapshot(query(collection(db, ref), where("email", "==", email)), callback);
+};
+
+export const updateProgreso = (ref, id, objeto) => {
+  const docRef = doc(db, ref, id);
+  return updateDoc(docRef, {
+    progreso: objeto /*esto hay que acabarlo*/,
+  });
+};
