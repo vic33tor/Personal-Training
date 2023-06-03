@@ -135,7 +135,16 @@ const LogInWithGoogle = () => {
     onLogIn("USUARIOS", result.user.reloadUserInfo.email, (docs) => {
       docs.forEach((doc) => {
         datos.guardarUsuario(doc.id);
+        console.log(doc.id)
       });
+      if (!datos.getRutina) {
+        onGetRutina("RUTINAS", datos.getUsuario, (docs) => {
+          docs.forEach((doc) => {
+            datos.guardarRutina(doc.id);
+            console.log(doc.id)
+          });
+        });
+      }
       router.push({
         name: "Inicio",
       });
