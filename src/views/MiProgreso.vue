@@ -91,6 +91,20 @@ export default {
 
     onMounted(() => {
       aut = getAuth();
+      if (!datos.getIdProgreso) {
+        console.log(datos.getUsuario);
+        anade("PROGRESO", {
+          idUsuario: datos.getUsuario,
+          dias: [],
+          repeticiones: [],
+          peso: [],
+        });
+        onGetProgreso("PROGRESO", datos.getUsuario, (docs) => {
+          docs.forEach((doc) => {
+            datos.guardarIdProgreso(doc.id);
+          });
+        });
+      }
       dameProgreso();
 
       chartInstance = new Chart(chartCanvas.value.getContext("2d"), {
@@ -118,21 +132,6 @@ export default {
           },
         },
       });
-
-      if (!datos.getIdProgreso) {
-        console.log(datos.getUsuario);
-        anade("PROGRESO", {
-          idUsuario: datos.getUsuario,
-          dias: [],
-          repeticiones: [],
-          peso: [],
-        });
-        onGetProgreso("PROGRESO", datos.getUsuario, (docs) => {
-          docs.forEach((doc) => {
-            datos.guardarIdProgreso(doc.id);
-          });
-        });
-      }
     });
 
     const dameProgreso = () => {
