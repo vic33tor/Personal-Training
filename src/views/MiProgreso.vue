@@ -9,7 +9,7 @@
       <div>
         <input
           class="input-field"
-          type="text"
+          type="number"
           placeholder="Repeticiones"
           v-model="repeticionesInput"
         />
@@ -17,7 +17,7 @@
       <div>
         <input
           class="input-field"
-          type="text"
+          type="number"
           placeholder="Peso"
           v-model="pesoInput"
         />
@@ -40,7 +40,7 @@ import {
   LineElement,
 } from "chart.js";
 
-import { onGetProgreso, updateProgreso } from "../API/firebase";
+import { onGetProgreso, updateProgreso, anade } from "../API/firebase";
 import { getAuth } from "firebase/auth";
 import { useDatosStore } from "@/stores/DatosForm";
 
@@ -54,10 +54,17 @@ Chart.register(
 
 export default {
   setup() {
-    let progreso = ref([]);
+    let progreso = ref({ dias: [], peso: [], repeticiones: [] });
+
     const diasProgreso = ref([]);
     const repeticionesProgreso = ref([]);
     const pesosProgreso = ref([]);
+    let progresoUsuario = ref({
+      dias: [],
+      repeticiones: [],
+      peso: [],
+    });
+    let progresoId = ref("");
     const datos = useDatosStore();
 
     const chartCanvas = ref(null);
@@ -85,6 +92,7 @@ export default {
     onMounted(() => {
       aut = getAuth();
       dameProgreso();
+
       chartInstance = new Chart(chartCanvas.value.getContext("2d"), {
         type: "line",
         data: chartData,
@@ -110,43 +118,57 @@ export default {
           },
         },
       });
+
+      if (!datos.getIdProgreso) {
+        console.log(datos.getUsuario);
+        anade("PROGRESO", {
+          idUsuario: datos.getUsuario,
+          dias: [],
+          repeticiones: [],
+          peso: [],
+        });
+        onGetProgreso("PROGRESO", datos.getUsuario, (docs) => {
+          docs.forEach((doc) => {
+            datos.guardarIdProgreso(doc.id);
+          });
+        });
+      }
     });
 
-    const prueba = () => {
-      console.log(diasProgreso.value);
-    };
-
-    const actualizarProgreso = () => {
-      repeticionesProgreso.value[0].push(repeticionesInput);
-      pesosProgreso.value[0].push(pesoInput);
-      diasProgreso.value[0].push(3);
-      progreso.value = {
-        dias: diasProgreso.value[0],
-        pesos: pesosProgreso.value[0],
-        repeticiones: repeticionesProgreso.value[0],
-      };
-      updateProgreso("USUARIOS", datos.getUsuario, {
-        progreso,
-      }); /**Acabar */
-      dameProgreso();
-    };
-
     const dameProgreso = () => {
-      console.log();
-
-      onGetProgreso("USUARIOS", aut.currentUser.email, (docs) => {
+      onGetProgreso("PROGRESO", datos.getUsuario, (docs) => {
         docs.forEach((doc) => {
-          const usuario = doc.data();
-          progreso.value.push(usuario);
-          diasProgreso.value.push(usuario.progreso.dias);
-          repeticionesProgreso.value.push(usuario.progreso.repeticiones);
-          pesosProgreso.value.push(usuario.progreso.peso);
-          chartData.datasets[0].data = usuario.progreso.repeticiones;
-          chartData.datasets[1].data = usuario.progreso.peso;
-          chartData.labels = usuario.progreso.dias;
+          progresoUsuario = doc.data();
+          progresoId = doc.id;
+
+          chartData.datasets[0].data = progresoUsuario.repeticiones;
+          chartData.datasets[1].data = progresoUsuario.peso;
+          chartData.labels = progresoUsuario.dias;
         });
         chartInstance.update();
       });
+    };
+
+    const prueba = () => {
+      console.log(progresoUsuario);
+    };
+
+    const actualizarProgreso = () => {
+      const tiempoTranscurrido = Date.now();
+      const hoy = new Date(tiempoTranscurrido);
+      console.log(hoy.toLocaleDateString());
+      console.log(progresoUsuario);
+      progresoUsuario.value.dias.push(hoy.toLocaleDateString());
+      progresoUsuario.value.peso.push(Number(pesoInput.value));
+      progresoUsuario.value.repeticiones.push(Number(repeticionesInput.value));
+
+      updateProgreso("PROGRESO", progresoId, {
+        dias: progresoUsuario.dias,
+        peso: progresoUsuario.peso,
+        repeticiones: progresoUsuario.repeticiones,
+      });
+
+      dameProgreso();
     };
 
     return {

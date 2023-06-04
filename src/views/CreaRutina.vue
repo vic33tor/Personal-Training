@@ -55,7 +55,7 @@ import { useDatosStore } from "@/stores/DatosForm";
 const datos = useDatosStore();
 const opciones = ref("");
 onMounted(async () => {
-  console.log(datos.getRutina)
+  console.log(datos.getRutina);
   if (!datos.getRutina) {
     console.log(datos.getUsuario);
     anade("RUTINAS", { user_id: datos.getUsuario });

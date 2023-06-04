@@ -81,18 +81,18 @@ export const getUnaClase = (ref, id_clase, callback) => {
 
 export const updateClasesContratadas = (ref, id, objeto) => {
   const docRef = doc(db, ref, id);
-  return updateDoc(docRef, {
+  return update(docRef, {
     clases: arrayUnion(objeto),
   });
 };
 
-export const onGetProgreso = (ref, email, callback) => {
-  onSnapshot(query(collection(db, ref), where("email", "==", email)), callback);
+export const onGetProgreso = (ref, idUsuario, callback) => {
+  onSnapshot(
+    query(collection(db, ref), where("idUsuario", "==", idUsuario)),
+    callback
+  );
 };
 
 export const updateProgreso = (ref, id, objeto) => {
-  const docRef = doc(db, ref, id);
-  return updateDoc(docRef, {
-    progreso: objeto,
-  });
+  updateDoc(doc(db, ref, id), objeto);
 };
