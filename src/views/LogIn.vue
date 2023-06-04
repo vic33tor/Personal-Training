@@ -118,6 +118,15 @@ const logIn = () => {
           });
         });
       }
+      /*
+      if (!datos.getIdProgreso) {
+        onGetProgreso("PROGRESO", datos.getUsuario, (docs) => {
+          docs.forEach((doc) => {
+            datos.guardarIdProgreso(doc.id);
+          });
+        });
+      }
+      */
       router.push({
         name: "Inicio",
       });
@@ -135,16 +144,25 @@ const LogInWithGoogle = () => {
     onLogIn("USUARIOS", result.user.reloadUserInfo.email, (docs) => {
       docs.forEach((doc) => {
         datos.guardarUsuario(doc.id);
-        console.log(doc.id)
+        console.log(doc.id);
       });
       if (!datos.getRutina) {
         onGetRutina("RUTINAS", datos.getUsuario, (docs) => {
           docs.forEach((doc) => {
             datos.guardarRutina(doc.id);
-            console.log(doc.id)
+            console.log(doc.id);
           });
         });
       }
+      /*
+      if (!datos.getIdProgreso) {
+        onGetProgreso("PROGRESO", datos.getUsuario, (docs) => {
+          docs.forEach((doc) => {
+            datos.guardarIdProgreso(doc.id);
+          });
+        });
+      }
+      */
       router.push({
         name: "Inicio",
       });
