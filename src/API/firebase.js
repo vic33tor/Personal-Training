@@ -93,6 +93,6 @@ export const onGetProgreso = (ref, email, callback) => {
 export const updateProgreso = (ref, id, objeto) => {
   const docRef = doc(db, ref, id);
   return updateDoc(docRef, {
-    progreso: objeto /*esto hay que acabarlo*/,
+    progreso: objeto,
   });
 };

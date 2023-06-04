@@ -2,24 +2,29 @@
   <div class="h-96 items-center content-center text-center">
     <h1 class="text-4xl text-white mt-2 mb-2">Mi Progreso</h1>
     <button @click="prueba">asd</button>
-    <div>
-      <input
-        class="input-field"
-        type="text"
-        placeholder="Repeticiones"
-        v-model="repeticionesInput"
-      />
+    <div class="botonera flex flex-row gap-5 mb-4">
+      <h1 class="text-white">
+        Introduce tus datos de entrenamiento diario aqui:
+      </h1>
+      <div>
+        <input
+          class="input-field"
+          type="text"
+          placeholder="Repeticiones"
+          v-model="repeticionesInput"
+        />
+      </div>
+      <div>
+        <input
+          class="input-field"
+          type="text"
+          placeholder="Peso"
+          v-model="pesoInput"
+        />
+      </div>
+      <button @click="actualizarProgreso">Confirmar</button>
     </div>
 
-    <div>
-      <input
-        class="input-field"
-        type="text"
-        placeholder="Peso"
-        v-model="pesoInput"
-      />
-    </div>
-    <button>Confirmar</button>
     <canvas ref="chartCanvas" class="bg-opacity-90 bg-white"></canvas>
   </div>
 </template>
@@ -35,8 +40,9 @@ import {
   LineElement,
 } from "chart.js";
 
-import { onGetProgreso } from "../API/firebase";
+import { onGetProgreso, updateProgreso } from "../API/firebase";
 import { getAuth } from "firebase/auth";
+import { useDatosStore } from "@/stores/DatosForm";
 
 Chart.register(
   CategoryScale,
@@ -48,7 +54,12 @@ Chart.register(
 
 export default {
   setup() {
-    const progreso = ref([]);
+    let progreso = ref([]);
+    const diasProgreso = ref([]);
+    const repeticionesProgreso = ref([]);
+    const pesosProgreso = ref([]);
+    const datos = useDatosStore();
+
     const chartCanvas = ref(null);
     const repeticionesInput = ref("");
     const pesoInput = ref("");
@@ -65,7 +76,6 @@ export default {
         },
         {
           label: "Peso",
-          data: [70, 72, 71, 73, 75],
           borderColor: "red",
           fill: false,
         },
@@ -103,7 +113,22 @@ export default {
     });
 
     const prueba = () => {
-      console.log(progreso.value[0].progreso.repeticiones);
+      console.log(diasProgreso.value);
+    };
+
+    const actualizarProgreso = () => {
+      repeticionesProgreso.value[0].push(repeticionesInput);
+      pesosProgreso.value[0].push(pesoInput);
+      diasProgreso.value[0].push(3);
+      progreso.value = {
+        dias: diasProgreso.value[0],
+        pesos: pesosProgreso.value[0],
+        repeticiones: repeticionesProgreso.value[0],
+      };
+      updateProgreso("USUARIOS", datos.getUsuario, {
+        progreso,
+      }); /**Acabar */
+      dameProgreso();
     };
 
     const dameProgreso = () => {
@@ -113,6 +138,9 @@ export default {
         docs.forEach((doc) => {
           const usuario = doc.data();
           progreso.value.push(usuario);
+          diasProgreso.value.push(usuario.progreso.dias);
+          repeticionesProgreso.value.push(usuario.progreso.repeticiones);
+          pesosProgreso.value.push(usuario.progreso.peso);
           chartData.datasets[0].data = usuario.progreso.repeticiones;
           chartData.datasets[1].data = usuario.progreso.peso;
           chartData.labels = usuario.progreso.dias;
@@ -127,6 +155,7 @@ export default {
       progreso,
       repeticionesInput,
       pesoInput,
+      actualizarProgreso,
     };
   },
 };
@@ -136,5 +165,12 @@ export default {
 canvas {
   width: 60%;
   height: 300px;
+}
+
+.botonera {
+  margin: 0 auto;
+  text-align: center;
+  justify-content: center;
+  place-content: center;
 }
 </style>
