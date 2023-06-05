@@ -56,9 +56,6 @@ export default {
   setup() {
     let progreso = ref({ dias: [], peso: [], repeticiones: [] });
 
-    const diasProgreso = ref([]);
-    const repeticionesProgreso = ref([]);
-    const pesosProgreso = ref([]);
     let progresoUsuario = ref({
       dias: [],
       repeticiones: [],
@@ -137,12 +134,12 @@ export default {
     const dameProgreso = () => {
       onGetProgreso("PROGRESO", datos.getUsuario, (docs) => {
         docs.forEach((doc) => {
-          progresoUsuario = doc.data();
-          progresoId = doc.id;
+          progresoUsuario.value = doc.data();
+          progresoId.value = doc.id;
 
-          chartData.datasets[0].data = progresoUsuario.repeticiones;
-          chartData.datasets[1].data = progresoUsuario.peso;
-          chartData.labels = progresoUsuario.dias;
+          chartData.datasets[0].data = progresoUsuario.value.repeticiones;
+          chartData.datasets[1].data = progresoUsuario.value.peso;
+          chartData.labels = progresoUsuario.value.dias;
         });
         chartInstance.update();
       });
@@ -155,16 +152,21 @@ export default {
     const actualizarProgreso = () => {
       const tiempoTranscurrido = Date.now();
       const hoy = new Date(tiempoTranscurrido);
-      console.log(hoy.toLocaleDateString());
-      console.log(progresoUsuario);
-      progresoUsuario.value.dias.push(hoy.toLocaleDateString());
-      progresoUsuario.value.peso.push(Number(pesoInput.value));
-      progresoUsuario.value.repeticiones.push(Number(repeticionesInput.value));
 
-      updateProgreso("PROGRESO", progresoId, {
-        dias: progresoUsuario.dias,
-        peso: progresoUsuario.peso,
-        repeticiones: progresoUsuario.repeticiones,
+      const progresoUsuarioActualizado = {
+        dias: [...progresoUsuario.value.dias, hoy.toLocaleDateString()],
+        peso: [...progresoUsuario.value.peso, pesoInput.value],
+        repeticiones: [
+          ...progresoUsuario.value.repeticiones,
+          repeticionesInput.value,
+        ],
+      };
+      progresoUsuario.value = progresoUsuarioActualizado;
+
+      updateProgreso("PROGRESO", progresoId.value, {
+        dias: progresoUsuario.value.dias,
+        peso: progresoUsuario.value.peso,
+        repeticiones: progresoUsuario.value.repeticiones,
       });
 
       dameProgreso();
@@ -177,6 +179,7 @@ export default {
       repeticionesInput,
       pesoInput,
       actualizarProgreso,
+      progresoUsuario,
     };
   },
 };
