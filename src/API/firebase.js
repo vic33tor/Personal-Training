@@ -82,7 +82,7 @@ export const getUnaClase = (ref, id_clase, callback) => {
 
 export const updateClasesContratadas = (ref, id, objeto) => {
   const docRef = doc(db, ref, id);
-  return update(docRef, {
+  return updateDoc(docRef, {
     clases: arrayUnion(objeto),
   });
 };
