@@ -41,9 +41,14 @@
         <option>Sabado</option>
         <option>Domingo</option>
       </select>
-      <button class="bg-yellow-300 pl-2 pr-2" @click="anhadirDia">
-        Añadir
-      </button>
+      <div class="botones">
+        <button class="bg-yellow-300 pl-2 pr-2 ml-2 mr-2" @click="anhadirDia">
+          Añadir
+        </button>
+        <button class="bg-yellow-300 pl-2 pr-2 ml-2 mr-2" @click="borrarDia">
+          Eliminar
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -52,8 +57,9 @@
 import { ref, onMounted } from "vue";
 import { anade, updateRutina, onGetRutina } from "@/API/firebase";
 import { useDatosStore } from "@/stores/DatosForm";
+import { deleteField } from "firebase/firestore";
 const datos = useDatosStore();
-const opciones = ref("");
+const opciones = ref("Lunes");
 onMounted(async () => {
   console.log(datos.getRutina);
   if (!datos.getRutina) {
@@ -81,6 +87,17 @@ const anhadirDia = () => {
   updateRutina("RUTINAS", datos.getRutina, {
     [opciones.value]: rutina,
   });
+  num_ejs.value = 0;
+  nombre_musculo.value = "";
+  alert("Día añadido con éxito");
+};
+const borrarDia = () => {
+  updateRutina("RUTINAS", datos.getRutina, {
+    [opciones.value]: deleteField()
+  });
+  num_ejs.value = 0;
+  nombre_musculo.value = "";
+  alert("Día borrado con éxito");
 };
 </script>
 
@@ -93,6 +110,11 @@ const anhadirDia = () => {
   margin-left: 4em;
   margin-right: 4em;
   padding: 1em;
+}
+.botones {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .dia h1 {
   margin-bottom: 1em;

@@ -11,7 +11,9 @@
           </h1>
         </div>
         <div>
-          <button @click="handleSignOut" v-if="isLog" class="boton">Cerrar Sesión</button>
+          <button @click="handleSignOut" v-if="isLog" class="boton">
+            Cerrar Sesión
+          </button>
         </div>
       </div>
     </div>
@@ -22,6 +24,8 @@
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { useDatosStore } from "@/stores/DatosForm";
+const datos = useDatosStore();
 
 const router = useRouter();
 const props = defineProps({
@@ -42,6 +46,8 @@ onMounted(() => {
 });
 
 const handleSignOut = () => {
+  datos.guardarRutina(undefined)
+  datos.guardarIdProgreso(undefined)
   signOut(auth).then(() => {
     router.push({
       name: "Login",
