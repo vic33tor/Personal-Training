@@ -13,8 +13,8 @@
       </select>
     </div>
     <div class="rutina">
-      <ul :class="{ dia_completo: !showSecondUl }">
-        <li v-for="(dia, idx) in rutinaFiltro" :key="idx">
+      <ul class="w-full" :class="{ dia_completo: !showSecondUl }">
+        <li class="w-full" v-for="(dia, idx) in rutinaFiltro" :key="idx">
           <div v-if="Object.prototype.toString.call(dia) === `[object Object]`">
             <div v-if="!idx" class="nombre_dia">{{ opciones }}</div>
             <div class="nombre_musculo">
@@ -27,7 +27,7 @@
               </div>
             </div>
           </div>
-          <div v-else>
+          <div v-else class="w-full">
             <ul :class="{ dia_completo: showSecondUl }">
               <div class="nombre_dia">{{ idx }}</div>
               <li class="nombre_musculo" v-for="(ej, idx) in dia" :key="idx">

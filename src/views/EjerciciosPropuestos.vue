@@ -69,7 +69,7 @@ const ejsFiltro = computed(() => {
 }
 .ejercicios {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 49% 49%;
 }
 .elementoEjercicios {
   transition: 0.3s;

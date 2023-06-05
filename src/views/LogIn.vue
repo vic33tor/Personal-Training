@@ -78,7 +78,12 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { ref } from "vue";
-import { onLogIn, onGetRutina, registraUsuario } from "../API/firebase";
+import {
+  onLogIn,
+  onGetRutina,
+  registraUsuario,
+  onGetProgreso,
+} from "../API/firebase";
 import { useDatosStore } from "@/stores/DatosForm";
 import {
   getAuth,
@@ -118,7 +123,6 @@ const logIn = () => {
           });
         });
       }
-      /*
       if (!datos.getIdProgreso) {
         onGetProgreso("PROGRESO", datos.getUsuario, (docs) => {
           docs.forEach((doc) => {
@@ -126,7 +130,6 @@ const logIn = () => {
           });
         });
       }
-      */
       router.push({
         name: "Inicio",
       });
@@ -154,7 +157,6 @@ const LogInWithGoogle = () => {
           });
         });
       }
-      /*
       if (!datos.getIdProgreso) {
         onGetProgreso("PROGRESO", datos.getUsuario, (docs) => {
           docs.forEach((doc) => {
@@ -162,7 +164,6 @@ const LogInWithGoogle = () => {
           });
         });
       }
-      */
       router.push({
         name: "Inicio",
       });

@@ -14,8 +14,7 @@ import MisClases from "../views/MisClases.vue";
 import MisMonitores from "../views/MisMonitores.vue";
 import InfoMonitor from "../views/InfoMonitor.vue";
 import InfoClase from "../views/InfoClase.vue";
-
-
+import VerClases from "../views/VerClases.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,14 +28,15 @@ const router = createRouter({
       path: "/home",
       name: "Inicio",
       component: MiInicio,
-      meta:{
-        retquiresAuth:true,
-      }
+      meta: {
+        retquiresAuth: true,
+      },
     },
     {
       path: "/Rutina",
       name: "Rutina",
       component: MiRutina,
+      redirect: { name: "Crea tu rutina" },
       children: [
         {
           //Ahora el path no tiene un / al inicio
@@ -49,6 +49,11 @@ const router = createRouter({
           path: "CreaRutina",
           name: "Crea tu rutina",
           component: CreaRutina,
+        },
+        {
+          path: "Clases",
+          name: "Ver tus clases",
+          component: VerClases,
         },
       ],
     },
@@ -102,6 +107,5 @@ const router = createRouter({
     },
   ],
 });
-
 
 export default router;

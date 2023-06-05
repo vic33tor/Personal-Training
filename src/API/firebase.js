@@ -12,6 +12,7 @@ import {
   doc,
   updateDoc,
   deleteDoc,
+  deleteField,
   arrayUnion,
 } from "firebase/firestore";
 
@@ -96,3 +97,4 @@ export const onGetProgreso = (ref, idUsuario, callback) => {
 export const updateProgreso = (ref, id, objeto) => {
   updateDoc(doc(db, ref, id), objeto);
 };
+
