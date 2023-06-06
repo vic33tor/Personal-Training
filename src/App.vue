@@ -1,11 +1,12 @@
 <script setup>
-import { RouterView } from "vue-router";
+import { RouterView, useRouter } from "vue-router";
 import NavBar from "./components/NavBar.vue";
 import CabeceraPrincipal from "@/components/CabeceraPrincipal.vue";
 import { ref, onMounted } from "vue";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const isLog = ref(false);
+const router = useRouter()
 
 let auth;
 
@@ -14,6 +15,11 @@ onMounted(() => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       isLog.value = true;
+      router.push({
+        name: "Inicio"
+      })
+//creo que si guardamos nuevamente la id del usuario en pinia por aqui
+// puede que solucionemos el problema de perder los datos al recargar la pagina
     } else {
       isLog.value = false;
     }
