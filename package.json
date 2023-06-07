@@ -12,6 +12,7 @@
     "chart.js": "^4.3.0",
     "firebase": "^9.19.1",
     "pinia": "^2.0.28",
+    "pinia-plugin-persistedstate": "^3.1.0",
     "swiper": "^9.2.4",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",

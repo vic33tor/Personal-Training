@@ -11,7 +11,7 @@
 
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-const link = [ "Crea tu rutina", "Ver tu rutina", "Ver tus clases"];
+const link = ["Crea tu rutina", "Ver tu rutina", "Ver tus clases"];
 </script>
 
 <style scoped>
