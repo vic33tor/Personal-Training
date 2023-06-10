@@ -98,3 +98,8 @@ export const updateProgreso = (ref, id, objeto) => {
   updateDoc(doc(db, ref, id), objeto);
 };
 
+export const updateNombreProgreso = (ref, id, objeto) => {
+  updateDoc(doc(db, ref, id), objeto);
+};
+
+export const deleteProgreso = (ref, id) => {};

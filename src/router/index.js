@@ -15,6 +15,8 @@ import MisMonitores from "../views/MisMonitores.vue";
 import InfoMonitor from "../views/InfoMonitor.vue";
 import InfoClase from "../views/InfoClase.vue";
 import VerClases from "../views/VerClases.vue";
+import ControlProgreso from "@/views/ControlProgreso.vue";
+import GraficoProgreso from "@/views/GraficoProgreso.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -66,6 +68,21 @@ const router = createRouter({
       path: "/Progreso",
       name: "Progreso",
       component: MiProgreso,
+      redirect: { name: "Control de progreso" },
+      children: [
+        {
+          //Ahora el path no tiene un / al inicio
+          //ya que se añade al path de la ruta padre
+          path: "ControlProgreso",
+          name: "Control de progreso",
+          component: ControlProgreso,
+        },
+        {
+          path: "SeguimientoProgreso",
+          name: "Seguimiento progreso",
+          component: GraficoProgreso,
+        },
+      ],
     },
     {
       path: "/Recetas",
