@@ -77,6 +77,9 @@ const clasesFiltro = computed(() => {
 </script>
 
 <style scoped>
+img {
+  width: fit-content;
+}
 .contenedorNombre {
   margin: 0 auto;
 }
