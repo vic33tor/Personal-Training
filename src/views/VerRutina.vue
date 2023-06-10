@@ -12,7 +12,7 @@
         <option value="Domingo">Domingo</option>
       </select>
     </div>
-    <div class="rutina">
+    <div v-if="existe" class="rutina">
       <ul class="w-full" :class="{ dia_completo: !showSecondUl }">
         <li class="w-full" v-for="(dia, idx) in rutinaFiltro" :key="idx">
           <div v-if="Object.prototype.toString.call(dia) === `[object Object]`">
@@ -42,6 +42,11 @@
         </li>
       </ul>
     </div>
+    <div v-else>
+      <h2 class="text-xl font-semibold">
+        Todavía no has creado ninguna rutina
+      </h2>
+    </div>
   </div>
 </template>
 
@@ -53,10 +58,12 @@ const datos = useDatosStore();
 const miRutina = ref([]);
 const opciones = ref("");
 const ordenados = ref({});
+const existe = ref(false);
 const showSecondUl = ref(true);
 onMounted(async () => {
   onGetRutina("RUTINAS", datos.getUsuario, (docs) => {
     docs.forEach((doc) => {
+      miRutina.value = [];
       const { user_id, ...datosRestantes } = doc.data();
       miRutina.value.push(datosRestantes);
       ordenados.value = Object.fromEntries(
@@ -75,6 +82,13 @@ onMounted(async () => {
       );
     });
   });
+  if (miRutina.value === []) {
+    existe.value = false;
+    console.log("false");
+  } else {
+    existe.value = true;
+    console.log("true");
+  }
 });
 const rutinaFiltro = computed(() => {
   if (!opciones.value) {
