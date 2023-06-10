@@ -28,7 +28,6 @@
 
 <script setup>
 import { onMounted, ref } from "vue";
-
 import { onDameReceta, updateClasesContratadas } from "../API/firebase";
 import { useRoute, useRouter } from "vue-router";
 import { useDatosStore } from "@/stores/DatosForm";

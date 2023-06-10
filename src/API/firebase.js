@@ -39,7 +39,8 @@ export const onLogIn = (ref, valorNombre, callback) => {
   );
 };
 
-export const onGetRutina = (ref, user_id, callback) => {
+
+export const onGetClaseUsuario = (ref, user_id, callback) => {
   onSnapshot(
     query(collection(db, ref), where("user_id", "==", user_id)),
     callback
@@ -55,6 +56,9 @@ export const registraUsuario = (ref, usuario) =>
   addDoc(collection(db, ref), usuario);
 
 export const updateRutina = (ref, id, objeto) =>
+  updateDoc(doc(db, ref, id), objeto);
+
+export const deleteClase = (ref, id, objeto) =>
   updateDoc(doc(db, ref, id), objeto);
 
 export const onDameReceta = (ref, callback) =>
