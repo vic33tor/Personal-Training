@@ -7,7 +7,7 @@ export const useDatosStore = defineStore(
     const id_usuario = ref("");
     const id_rutina = ref("");
     const is_login = ref(false);
-    const id_progreso = ref("");
+    const id_progreso = ref(undefined);
 
     const getUsuario = computed(() => id_usuario.value);
     const getRutina = computed(() => id_rutina.value);
@@ -41,6 +41,6 @@ export const useDatosStore = defineStore(
     };
   },
   {
-    persist: true
+    persist: true,
   }
 );

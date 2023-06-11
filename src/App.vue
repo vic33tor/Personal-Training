@@ -6,7 +6,7 @@ import { ref, onMounted } from "vue";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const isLog = ref(false);
-const router = useRouter()
+const router = useRouter();
 
 let auth;
 
@@ -16,10 +16,10 @@ onMounted(() => {
     if (user) {
       isLog.value = true;
       router.push({
-        name: "Inicio"
-      })
-//creo que si guardamos nuevamente la id del usuario en pinia por aqui
-// puede que solucionemos el problema de perder los datos al recargar la pagina
+        name: "Inicio",
+      });
+      //creo que si guardamos nuevamente la id del usuario en pinia por aqui
+      // puede que solucionemos el problema de perder los datos al recargar la pagina
     } else {
       isLog.value = false;
     }
@@ -32,12 +32,14 @@ onMounted(() => {
     <div v-if="isLog">
       <CabeceraPrincipal titulo="Just Fit" />
     </div>
-
-    <RouterView />
+    <div class="overflow-scroll overflow-y-hidden overflow-x-hidden">
+      <RouterView class="mb-36" />
+    </div>
 
     <div class="basis-1/5" v-if="isLog">
       <NavBar
         :links="['Inicio', 'Rutina', 'Ejercicios', 'Progreso', 'Servicios']"
+        class=""
       />
     </div>
   </div>

@@ -46,6 +46,7 @@
               title="Contraseña"
             />
           </div>
+          <p>{{ errMsg }}</p>
           <div class="botonera">
             <button type="submit" class="log" @click="registro()">
               Terminar
@@ -101,6 +102,8 @@ const router = useRouter();
 
 const mostrarRegistro = ref(false);
 
+const errMsg = ref("");
+
 const logIn = () => {
   const auth = getAuth();
 
@@ -137,6 +140,7 @@ const logIn = () => {
 
     .catch((error) => {
       alert(error);
+      errMsg.value = error;
     });
 };
 

@@ -6,7 +6,7 @@
         src="../assets/Images/portadaJustFit.png"
         alt=""
       />
-      <div class="text-center absolute ">
+      <div class="text-center absolute">
         <h1
           class="text-white text-xl font-bold rounded-lg bg-stone-500 p-3 bg-opacity-70"
         >
@@ -168,9 +168,9 @@ const verRectas = () => {
   justify-content: center;
   text-align: center;
   align-items: center;
-
   color: white;
   font-size: xx-large;
+  margin-top: 75px;
 }
 
 .imagenPropuesta {

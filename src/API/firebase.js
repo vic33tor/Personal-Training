@@ -39,6 +39,12 @@ export const onLogIn = (ref, valorNombre, callback) => {
   );
 };
 
+export const onGetRutina = (ref, user_id, callback) => {
+  onSnapshot(
+    query(collection(db, ref), where("user_id", "==", user_id)),
+    callback
+  );
+};
 
 export const onGetClaseUsuario = (ref, user_id, callback) => {
   onSnapshot(
@@ -106,4 +112,10 @@ export const updateNombreProgreso = (ref, id, objeto) => {
   updateDoc(doc(db, ref, id), objeto);
 };
 
-export const deleteProgreso = (ref, id) => {};
+export const deleteProgreso = (documentId) => {
+  const documentRef = doc(collection(db, "PROGRESO"), documentId); // Reemplaza "nombre_coleccion" con el nombre de tu colección
+  deleteDoc(documentRef);
+  console.log("Documento eliminado correctamente");
+};
+
+// Llamada a la función para eliminar un documento específico

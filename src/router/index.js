@@ -17,6 +17,7 @@ import InfoClase from "../views/InfoClase.vue";
 import VerClases from "../views/VerClases.vue";
 import ControlProgreso from "@/views/ControlProgreso.vue";
 import GraficoProgreso from "@/views/GraficoProgreso.vue";
+import { getAuth } from "firebase/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,7 +32,7 @@ const router = createRouter({
       name: "Inicio",
       component: MiInicio,
       meta: {
-        retquiresAuth: true,
+        requiresAuth: true,
       },
     },
     {
@@ -39,6 +40,9 @@ const router = createRouter({
       name: "Rutina",
       component: MiRutina,
       redirect: { name: "Crea tu rutina" },
+      meta: {
+        requiresAuth: true,
+      },
       children: [
         {
           //Ahora el path no tiene un / al inicio
@@ -46,16 +50,25 @@ const router = createRouter({
           path: "VerRutina",
           name: "Ver tu rutina",
           component: VerRutina,
+          meta: {
+            requiresAuth: true,
+          },
         },
         {
           path: "CreaRutina",
           name: "Crea tu rutina",
           component: CreaRutina,
+          meta: {
+            requiresAuth: true,
+          },
         },
         {
           path: "Clases",
           name: "Ver tus clases",
           component: VerClases,
+          meta: {
+            requiresAuth: true,
+          },
         },
       ],
     },
@@ -63,12 +76,18 @@ const router = createRouter({
       path: "/Ejercicios-Propuestos",
       name: "Ejercicios",
       component: EjerciciosPropuestos,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/Progreso",
       name: "Progreso",
       component: MiProgreso,
       redirect: { name: "Control de progreso" },
+      meta: {
+        requiresAuth: true,
+      },
       children: [
         {
           //Ahora el path no tiene un / al inicio
@@ -76,11 +95,17 @@ const router = createRouter({
           path: "ControlProgreso",
           name: "Control de progreso",
           component: ControlProgreso,
+          meta: {
+            requiresAuth: true,
+          },
         },
         {
           path: "SeguimientoProgreso",
           name: "Seguimiento progreso",
           component: GraficoProgreso,
+          meta: {
+            requiresAuth: true,
+          },
         },
       ],
     },
@@ -88,41 +113,75 @@ const router = createRouter({
       path: "/Recetas",
       name: "MisRecetas",
       component: MisRecetas,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/RecetaInfo",
       name: "RecetaInfo",
       component: RecetaInfo,
       props: true,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/Servicios",
       name: "Servicios",
       component: MisVarios,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/MisClases",
       name: "MisClases",
       component: MisClases,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/MisMonitores",
       name: "MisMonitores",
       component: MisMonitores,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/InfoMonitor",
       name: "InfoMonitor",
       component: InfoMonitor,
       props: true,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/InfoClase",
       name: "InfoClase",
       component: InfoClase,
       props: true,
+      meta: {
+        requiresAuth: true,
+      },
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (getAuth().currentUser) {
+      next();
+    } else {
+      alert("No tienes acceso");
+      next("/");
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
