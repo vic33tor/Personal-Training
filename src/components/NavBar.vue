@@ -31,6 +31,7 @@ nav a {
   align-items: center;
   text-align: center;
   color: white;
+  margin-top: 10px;
 }
 .router-link-active {
   --tw-text-opacity: 1;

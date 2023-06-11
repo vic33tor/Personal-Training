@@ -55,7 +55,8 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { anade, updateRutina, onGetRutina } from "@/API/firebase";
+import { anade, updateRutina } from "@/API/firebase";
+import { onGetRutina } from "@/API/firebase";
 import { useDatosStore } from "@/stores/DatosForm";
 import { deleteField } from "firebase/firestore";
 const datos = useDatosStore();
@@ -93,7 +94,7 @@ const anhadirDia = () => {
 };
 const borrarDia = () => {
   updateRutina("RUTINAS", datos.getRutina, {
-    [opciones.value]: deleteField()
+    [opciones.value]: deleteField(),
   });
   num_ejs.value = 0;
   nombre_musculo.value = "";

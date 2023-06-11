@@ -9,7 +9,7 @@
         <li
           v-for="item in monitores"
           :key="item.id"
-          class="monitor border border-gray-300 rounded-lg p-4 flex items-center w-1/2 bg-slate-700"
+          class="monitor border border-gray-300 rounded-lg p-4 flex items-center bg-zinc-800 w-2/4 text-gray-200"
         >
           <div class="ml-2">
             <img

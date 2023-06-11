@@ -1,16 +1,13 @@
 <template>
-  <div>
+  <div class="">
     <div class="h-96 items-center content-center text-center">
       <h1 class="text-4xl text-white mt-2 mb-2">
         Mi Progreso de: {{ progresoUsuario.nombre }}
       </h1>
-      <div class="botonera flex flex-row gap-5 mb-4">
-        <h1 class="text-white">
-          Introduce tus datos de entrenamiento diario aqui:
-        </h1>
+      <div class="flex justify-center gap-5 mb-4 mt-4">
         <div>
           <input
-            class="input-field"
+            class="input-field rounded-md p-1"
             type="number"
             placeholder="Repeticiones"
             v-model="repeticionesInput"
@@ -18,21 +15,33 @@
         </div>
         <div>
           <input
-            class="input-field"
+            class="input-field rounded-md p-1"
             type="number"
             placeholder="Peso"
             v-model="pesoInput"
           />
         </div>
-        <button @click="actualizarProgreso">Confirmar</button>
       </div>
-
+      <button
+        class="mb-4 bg-yellow-300 rounded-md p-1 text-zinc-800 hover:bg-yellow-200 transition-all w-48"
+        @click="actualizarProgreso"
+      >
+        <h1 class="">Agregar datos</h1>
+      </button>
       <canvas ref="chartCanvas" class="bg-opacity-90 bg-white"></canvas>
     </div>
   </div>
 </template>
 
 <script>
+/*
+<div class="place-content-center text-center items-center">
+    <h1 class="text-4xl text-white mt-2 mb-2 w-2/4">
+      Debes crear tu progreso para viusalizarlo. Hazlo en el apartado "Control
+      de progreso"
+    </h1>
+  </div>
+  */
 import { ref, onMounted } from "vue";
 import {
   Chart,
@@ -41,6 +50,9 @@ import {
   LineController,
   PointElement,
   LineElement,
+  Tooltip,
+  Legend,
+  Filler,
 } from "chart.js";
 
 import { onGetProgreso, updateProgreso, anade } from "../API/firebase";
@@ -52,7 +64,10 @@ Chart.register(
   LinearScale,
   LineController,
   PointElement,
-  LineElement
+  LineElement,
+  Tooltip,
+  Legend,
+  Filler
 );
 
 export default {
@@ -80,12 +95,16 @@ export default {
         {
           label: "Repeticiones",
           borderColor: "green",
+          backgroundColor: "rgba(0, 128, 0, 0.3)",
+          tension: 0.25,
           fill: true,
         },
         {
           label: "Peso",
           borderColor: "red",
-          fill: false,
+          backgroundColor: "rgba(255, 0, 0, 0.3)",
+          tension: 0.25,
+          fill: true,
         },
       ],
     };
@@ -106,15 +125,40 @@ export default {
               title: {
                 display: true,
                 text: "Días de entrenamiento",
+                color: "gray",
+                font: {
+                  size: 16,
+                },
+              },
+              ticks: {
+                color: "gray",
               },
             },
             y: {
               display: true,
               title: {
                 display: true,
-                text: "Repeticiones y peso",
+                text: "Repeticiones (n) y peso (kg)",
+                color: "gray",
+                font: {
+                  size: 16,
+                },
+              },
+              ticks: {
+                color: "gray",
               },
               beginAtZero: true,
+            },
+          },
+          plugins: {
+            legend: {
+              position: "top",
+              labels: {
+                color: "gray",
+                font: {
+                  size: 14,
+                },
+              },
             },
           },
         },
@@ -171,21 +215,23 @@ export default {
       actualizarProgreso,
       progresoUsuario,
       aut,
+      datos,
     };
   },
 };
 </script>
 
 <style>
-canvas {
-  width: 60%;
-  height: 300px;
-}
-
 .botonera {
   margin: 0 auto;
   text-align: center;
   justify-content: center;
   place-content: center;
+}
+
+.chart-canvas {
+  width: 100%; /* Ajusta el ancho del gráfico */
+  height: 400px; /* Ajusta la altura del gráfico */
+  /* Agrega otros estilos personalizados según tus necesidades */
 }
 </style>

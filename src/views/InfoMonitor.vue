@@ -1,5 +1,5 @@
 <template>
-  <div class="contenedorMonitor rounded-xl shadow-md overflow-hidden">
+  <div class="contenedorMonitor rounded-xl shadow-md">
     <div class="w-4/4">
       <img :src="monitorActual.img" alt="Imagen del monitor" class="w-full" />
     </div>
@@ -87,5 +87,6 @@ const contrataMonitor = (monitorid) => {
   margin-top: 10px;
   width: 40%;
   padding-bottom: 50px;
+  margin-bottom: 90px;
 }
 </style>
