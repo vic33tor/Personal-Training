@@ -27,10 +27,18 @@
           </div>
 
           <button
+            v-if="datos.getTieneMonitor !== item.id"
             @click="contrataMonitor(item.id)"
             class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-500 mr-2 text-black"
           >
             Contratar
+          </button>
+          <button
+            v-else
+            @click="eliminaMonitor()"
+            class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-500 mr-2 text-black"
+          >
+            Eliminar
           </button>
         </li>
       </ul>
@@ -48,10 +56,11 @@ import { useRouter } from "vue-router";
 const datos = useDatosStore();
 const router = useRouter();
 const monitores = ref([]);
-const idMonitorActual = ref();
+const idMonitorActual = ref("");
 
 onMounted(() => {
   dameMonitores();
+  dameIdMonitor();
 });
 
 const dameMonitores = () => {
@@ -71,9 +80,12 @@ const verMonitor = (id) => {
 };
 
 const dameIdMonitor = () => {
-  onGetMonitorId("USUARIOS", datos.getUsuario, (docs) => {
+  onGetMonitorId("USUARIOS", (docs) => {
     docs.forEach((doc) => {
-      idMonitorActual.value = doc.data().monitorid;
+      if (doc.id == datos.getUsuario) {
+        idMonitorActual.value = doc.data().monitorid;
+        datos.guardarTieneMonitor(idMonitorActual.value);
+      }
     });
   });
 };
@@ -87,14 +99,21 @@ const contrataMonitor = (monitorid) => {
       ) === true
     ) {
       updateMonitorId("USUARIOS", datos.getUsuario, { monitorid: monitorid });
+      datos.guardarTieneMonitor(monitorid);
       alert("El contrato con su monitor ha sido actualizado");
     } else {
       alert("Operación cancelada");
     }
   } else {
     updateMonitorId("USUARIOS", datos.getUsuario, { monitorid: monitorid });
+    datos.guardarTieneMonitor(monitorid);
     alert("Monitor contratado");
   }
+};
+const eliminaMonitor = () => {
+  updateMonitorId("USUARIOS", datos.getUsuario, { monitorid: "" });
+  alert("El contrato con su monitor ha sido actualizado");
+  datos.guardarTieneMonitor("");
 };
 </script>
 

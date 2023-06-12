@@ -14,6 +14,7 @@ import {
   deleteDoc,
   deleteField,
   arrayUnion,
+  FieldPath,
 } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -70,11 +71,8 @@ export const deleteClase = (ref, id, objeto) =>
 export const onDameReceta = (ref, callback) =>
   onSnapshot(collection(db, ref), callback);
 
-export const onGetMonitorId = (ref, user_id, callback) => {
-  onSnapshot(
-    query(collection(db, ref), where("user_id", "==", user_id)),
-    callback
-  );
+export const onGetMonitorId = (ref, callback) => {
+  onSnapshot(collection(db, ref), callback);
 };
 
 export const updateMonitorId = (ref, id, objeto) =>
