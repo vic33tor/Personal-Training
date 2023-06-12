@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div v-show="datos.getIdProgreso" class="">
     <div class="h-96 items-center content-center text-center">
       <h1 class="text-4xl text-white mt-2 mb-2">
         Mi Progreso de: {{ progresoUsuario.nombre }}
@@ -31,17 +31,18 @@
       <canvas ref="chartCanvas" class="bg-opacity-90 bg-white"></canvas>
     </div>
   </div>
-</template>
-
-<script>
-/*
-<div class="place-content-center text-center items-center">
+  <div
+    v-show="!datos.getIdProgreso"
+    class="place-content-center text-center items-center"
+  >
     <h1 class="text-4xl text-white mt-2 mb-2 w-2/4">
       Debes crear tu progreso para viusalizarlo. Hazlo en el apartado "Control
       de progreso"
     </h1>
   </div>
-  */
+</template>
+
+<script>
 import { ref, onMounted } from "vue";
 import {
   Chart,
@@ -112,6 +113,11 @@ export default {
     onMounted(() => {
       aut = getAuth();
       dameProgreso();
+      onGetProgreso("PROGRESO", datos.getUsuario, (docs) => {
+        docs.forEach((doc) => {
+          datos.guardarIdProgreso(doc.id);
+        });
+      });
 
       chartInstance = new Chart(chartCanvas.value.getContext("2d"), {
         type: "line",

@@ -15,10 +15,18 @@
     </div>
     <div class="items-end content-end text-right">
       <button
+        v-if="datos.getTieneMonitor !== monitorActual.id"
         @click="contrataMonitor(monitorActual.id)"
         class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-500 w-4/12 mr-8"
       >
         Contratar
+      </button>
+      <button
+        v-else
+        @click="eliminaMonitor(monitorActual.id)"
+        class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-500 w-4/12 mr-8"
+      >
+        Eliminar
       </button>
     </div>
   </div>
@@ -38,6 +46,7 @@ const idMonitorActual = ref();
 
 onMounted(() => {
   dameMonitor(route.query.id);
+  dameIdMonitor();
 });
 
 const dameMonitor = (id) => {
@@ -51,9 +60,12 @@ const dameMonitor = (id) => {
 };
 
 const dameIdMonitor = () => {
-  onGetMonitorId("USUARIOS", datos.getUsuario, (docs) => {
+  onGetMonitorId("USUARIOS", (docs) => {
     docs.forEach((doc) => {
-      idMonitorActual.value = doc.data().monitorid;
+      if (doc.id == datos.getUsuario) {
+        idMonitorActual.value = doc.data().monitorid;
+        datos.guardarTieneMonitor(idMonitorActual.value);
+      }
     });
   });
 };
@@ -67,14 +79,21 @@ const contrataMonitor = (monitorid) => {
       ) === true
     ) {
       updateMonitorId("USUARIOS", datos.getUsuario, { monitorid: monitorid });
+      datos.guardarTieneMonitor(monitorid);
       alert("El contrato con su monitor ha sido actualizado");
     } else {
       alert("Operación cancelada");
     }
   } else {
     updateMonitorId("USUARIOS", datos.getUsuario, { monitorid: monitorid });
+    datos.guardarTieneMonitor(monitorid);
     alert("Monitor contratado");
   }
+};
+const eliminaMonitor = () => {
+  updateMonitorId("USUARIOS", datos.getUsuario, { monitorid: "" });
+  alert("El contrato con su monitor ha sido actualizado");
+  datos.guardarTieneMonitor("");
 };
 </script>
 

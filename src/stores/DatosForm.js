@@ -8,11 +8,13 @@ export const useDatosStore = defineStore(
     const id_rutina = ref("");
     const is_login = ref(false);
     const id_progreso = ref(undefined);
+    const tieneMonitor = ref("");
 
     const getUsuario = computed(() => id_usuario.value);
     const getRutina = computed(() => id_rutina.value);
     const getIsLogin = computed(() => is_login.value);
     const getIdProgreso = computed(() => id_progreso.value);
+    const getTieneMonitor = computed(() => tieneMonitor.value);
 
     const guardarUsuario = (usu) => {
       id_usuario.value = usu;
@@ -28,16 +30,21 @@ export const useDatosStore = defineStore(
     const guardarIdProgreso = (valor) => {
       id_progreso.value = valor;
     };
+    const guardarTieneMonitor = (valor) => {
+      tieneMonitor.value = valor;
+    };
 
     return {
       getUsuario,
       getRutina,
       getIsLogin,
       getIdProgreso,
+      getTieneMonitor,
       guardarUsuario,
       guardarRutina,
       guardarIsLogin,
       guardarIdProgreso,
+      guardarTieneMonitor,
     };
   },
   {
