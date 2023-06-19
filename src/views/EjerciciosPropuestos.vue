@@ -28,11 +28,10 @@
                 :key="key"
               >
                 <p>{{ ej.Nombre }}</p>
-                <p>{{ ej.Enfoque }}</p>
                 <div class="imagenEjercicios">
                   <img :src="ej.Img" alt="" class="rounded-md" />
                 </div>
-                <div class="textoEjercicios">
+                <div class="textoEjercicios p-4">
                   {{ ej.Descripción }}
                 </div>
               </li>

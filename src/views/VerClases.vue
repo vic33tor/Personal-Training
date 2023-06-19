@@ -8,8 +8,13 @@
             <p class="text-gray-500 mt-1">
               Hora: {{ clase.inicio }}-{{ clase.fin }}
             </p>
+            <span class="text-gray-500 mt-1">Días:</span>
+            <div class="flex flex-col">
+              <div v-for="(dia, idx) in clase.dias" :key="idx">
+                <p class="text-gray-500 mt-1">-{{ dia }}</p>
+              </div>
+            </div>
 
-            <p class="text-gray-500 mt-1">Días: {{ clase.dias }}</p>
             <button
               class="mt-3 mb-3bg rounded-md p-1 bg-yellow-300 text-zinc-800 hover:bg-yellow-200 transition-all"
               @click="borrarClase(idx)"
@@ -66,7 +71,7 @@ const borrarClase = (index) => {
   justify-content: center;
   background-color: rgb(39 39 42);
   place-content: center;
-  width: 75%;
+  width: 50%;
   margin: 0 auto;
   border-radius: 10px;
 }

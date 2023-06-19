@@ -81,7 +81,7 @@ const clasesFiltro = computed(() => {
 
 <style scoped>
 img {
-  width: fit-content;
+  width: 100%;
 }
 .contenedorNombre {
   margin: 0 auto;

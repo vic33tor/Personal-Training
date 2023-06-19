@@ -13,9 +13,13 @@
           <div class="botonera">
             <button type="submit" class="log" @click="logIn">Log In</button>
             <button
-              class="bg-slate-200 p-0.5 rounded-md"
+              class="bg-slate-200 rounded-md flex flex-row p-2 hover:bg-slate-400 transition-colors"
               @click="LogInWithGoogle"
             >
+              <img
+                class="h-5 w-5 mr-2 mt-0.5"
+                src="../assets/Google__G__Logo.png"
+              />
               Log in con Google
             </button>
             <button class="registro" @click="mostrarRegistro = true">
@@ -56,8 +60,12 @@
             <button
               type="submit"
               @click="signInWithGoogle"
-              class="bg-slate-200 p-0.5 rounded-md"
+              class="bg-slate-200 p-2 rounded-md flex flex-row hover:bg-slate-400 transition-colors"
             >
+              <img
+                class="h-5 w-5 mr-2 mt-0.5"
+                src="../assets/Google__G__Logo.png"
+              />
               Regístrate con Google
             </button>
           </div>

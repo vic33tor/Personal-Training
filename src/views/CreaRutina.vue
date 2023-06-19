@@ -39,16 +39,18 @@
       />
       <ul>
         <li v-for="(el, index) in num_ejs" :key="index">
-          <span class="text-xl font-semibold mr-2">{{ index + 1 }}</span>
+          <span class="text-xl text-white font-semibold mr-2">{{
+            index + 1
+          }}</span>
           <input
-            class="mr-2 p-1 text-gray-500"
+            class="mr-2 p-1 text-gray-500 rounded-md"
             :name="'nombre-' + index + 1"
             type="text"
             placeholder="nombre"
             v-model="nombres[index]"
           />
           <input
-            class="p-1 text-gray-500"
+            class="p-1 text-gray-500 rounded-md"
             :name="'series' + index + 1"
             type="number"
             placeholder="numero series"
