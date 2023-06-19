@@ -28,7 +28,7 @@
     <Transition>
       <div class="contenedorRegistro" v-if="mostrarRegistro">
         <form class="" @submit.prevent="">
-          <h1 class="">Registro</h1>
+          <h1 class="">REGISTRO</h1>
           <div class="inputCont">
             <input
               class=""
@@ -52,7 +52,7 @@
               Terminar
             </button>
           </div>
-          <div class="botonera">
+          <div class="">
             <button
               type="submit"
               @click="signInWithGoogle"
@@ -61,7 +61,7 @@
               Regístrate con Google
             </button>
           </div>
-          <div class="botonera">
+          <div class="">
             <button
               type="submit"
               @click="mostrarRegistro = false"

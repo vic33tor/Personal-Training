@@ -29,14 +29,14 @@
           <button
             v-if="datos.getTieneMonitor !== item.id"
             @click="contrataMonitor(item.id)"
-            class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-200 mr-2 text-black"
+            class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-200 mr-2 text-black transition-colors"
           >
             Contratar
           </button>
           <button
             v-else
             @click="eliminaMonitor()"
-            class="bg-red-400 rounded-md px-4 py-2 hover:bg-red-200 mr-2 text-black"
+            class="bg-red-400 rounded-md px-4 py-2 hover:bg-red-200 mr-2 text-black transition-colors"
           >
             Eliminar
           </button>
