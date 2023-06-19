@@ -1,7 +1,10 @@
 <template>
   <div>
-    <div class="text-center text-white text-2xl mt-2">
-      <select v-model="opciones" class="mt-2 text-black rounded-md text-center">
+    <div class="text-center text-2xl mt-2">
+      <select
+        v-model="opciones"
+        class="mt-2 p-1 text-gray-500 rounded-md text-center"
+      >
         <option value="">Todos</option>
         <option value="Lunes">Lunes</option>
         <option value="Martes">Martes</option>
@@ -22,8 +25,12 @@
             </div>
             <div v-for="(ej, idx) in rutinaFiltro" :key="idx">
               <div class="ejercicio" v-if="dia.nombre_dia">
-                <span>{{ ej.nombre }}</span>
-                <span>{{ ej.series }}</span>
+                <span class="items-start text-gray-500">{{ ej.nombre }}</span>
+                <span
+                  v-if="ej.series != undefined"
+                  class="items-end text-gray-500"
+                  >{{ ej.series + " series" }}</span
+                >
               </div>
             </div>
           </div>
@@ -34,8 +41,12 @@
                 {{ ej.nombre_dia }}
               </li>
               <li class="ejercicio" v-for="(ej, idx) in dia" :key="idx">
-                <span>{{ ej.nombre }}</span>
-                <span>{{ ej.series }}</span>
+                <span class="items-start text-gray-500">{{ ej.nombre }}</span>
+                <span
+                  v-if="ej.series != undefined"
+                  class="items-end text-gray-500"
+                  >{{ ej.series + " series" }}</span
+                >
               </li>
             </ul>
           </div>
@@ -92,22 +103,26 @@ onMounted(async () => {
 });
 const rutinaFiltro = computed(() => {
   if (!opciones.value) {
-    toggleShowSecondUl();
+    toggleShowSecondUlTrue();
     return ordenados.value;
   } else {
-    toggleShowSecondUl();
+    toggleShowSecondUlFalse();
     const claves = Object.keys(miRutina.value[0]);
     console.log(miRutina.value[0]);
     console.log(claves);
     if (claves.includes(opciones.value)) {
       return miRutina.value[0][opciones.value];
     } else {
-      return "Descanso";
+      let descanso = { "Este día no tiene nada seleccionado": 2 };
+      return descanso;
     }
   }
 });
-const toggleShowSecondUl = () => {
-  showSecondUl.value = !showSecondUl.value;
+const toggleShowSecondUlTrue = () => {
+  showSecondUl.value = true;
+};
+const toggleShowSecondUlFalse = () => {
+  showSecondUl.value = false;
 };
 </script>
 
@@ -115,6 +130,9 @@ const toggleShowSecondUl = () => {
 .nombre_dia {
   text-align: center;
   font-size: xx-large;
+  line-height: 1.75rem;
+  font-weight: 600;
+  margin-top: 8px;
 }
 .rutina {
   display: flex;
@@ -128,12 +146,13 @@ const toggleShowSecondUl = () => {
 .nombre_musculo {
   text-align: center;
   font-size: x-large;
+  font-weight: 600;
 }
 .ejercicio {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   margin-top: 20px;
   margin-bottom: 20px;
 }

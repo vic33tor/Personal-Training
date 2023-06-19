@@ -1,29 +1,43 @@
 <template>
   <div>
-    <h1>
-      Aqui vas a crear tu rutina, indica los ejercicios que quieres hacer en un
-      determinado díaa, selecciona el día y añadelo a tu rutina
+    <h1 class="text-crear-rutina text-xl font-semibold">
+      Para crear tu rutina lo que tienes que hacer es rellenar día a día los
+      ejercicios que realizarás, marcando el número de ejercicios, sus
+      respectivos nombres y número de series. Una vez finalizado dale al botón
+      de añadir y continúa con los demás días.
+    </h1>
+    <h1 class="text-crear-rutina text-xl font-semibold">
+      Si quieres editar un día de tu rutina, tienes que rellenar el día con los
+      ejercicios que ya están incluidos y los nuevos que quieras añadir. Para
+      borrar un día, simplemente selecciona el día que quieras borrar y haz
+      click en el botón de eliminar
     </h1>
     <div class="dia">
-      <h1>Nombre del dia</h1>
+      <h1 class="text-xl font-semibold">Nombre del día</h1>
       <input
-        class="mb-3"
+        class="mb-3 p-1 text-gray-500"
         v-model="nombre_musculo"
         placeholder="Pecho y triceps"
       />
-      <h1>Numero de ejercicios</h1>
-      <input class="mb-3" v-model="num_ejs" type="number" placeholder="1" />
+      <h1 class="text-xl font-semibold">Número de ejercicios</h1>
+      <input
+        class="mb-3 p-1 text-gray-500"
+        v-model="num_ejs"
+        type="number"
+        placeholder="1"
+      />
       <ul>
         <li v-for="(el, index) in num_ejs" :key="index">
-          {{ index + 1 }}
+          <span class="text-xl font-semibold mr-2">{{ index + 1 }}</span>
           <input
-            class="mr-2"
+            class="mr-2 p-1 text-gray-500"
             :name="'nombre-' + index + 1"
             type="text"
             placeholder="nombre"
             v-model="nombres[index]"
           />
           <input
+            class="p-1 text-gray-500"
             :name="'series' + index + 1"
             type="number"
             placeholder="numero series"
@@ -31,8 +45,8 @@
           />
         </li>
       </ul>
-      <h1>Dia de la semana</h1>
-      <select v-model="opciones" class="p-1 mb-4">
+      <h1 class="text-xl font-semibold">Día de la semana</h1>
+      <select v-model="opciones" class="p-1 mb-8 text-gray-500">
         <option>Lunes</option>
         <option>Martes</option>
         <option>Miercoles</option>
@@ -111,6 +125,14 @@ const borrarDia = () => {
   margin-left: 4em;
   margin-right: 4em;
   padding: 1em;
+}
+.text-crear-rutina {
+  display: flex;
+  align-items: center;
+  margin-left: 4em;
+  margin-right: 4em;
+  padding: 1em;
+  text-align: center;
 }
 .botones {
   display: flex;
