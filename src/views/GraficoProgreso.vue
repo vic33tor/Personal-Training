@@ -23,10 +23,16 @@
         </div>
       </div>
       <button
-        class="mb-4 bg-yellow-300 rounded-md p-1 text-zinc-800 hover:bg-yellow-200 transition-all w-48"
+        class="mb-4 mr-4 bg-yellow-300 rounded-md p-1 text-zinc-800 hover:bg-yellow-200 transition-all w-48"
         @click="actualizarProgreso"
       >
         <h1 class="">Agregar datos</h1>
+      </button>
+      <button
+        class="mb-4 bg-yellow-300 rounded-md p-1 text-zinc-800 hover:bg-yellow-200 transition-all w-48"
+        @click="borrarAportacion"
+      >
+        <h1 class="">Borrar última aportación</h1>
       </button>
       <canvas ref="chartCanvas" class="bg-opacity-90 bg-white mb-24"></canvas>
     </div>
@@ -56,7 +62,11 @@ import {
   Filler,
 } from "chart.js";
 
-import { onGetProgreso, updateProgreso, anade } from "../API/firebase";
+import {
+  onGetProgreso,
+  updateProgreso,
+  deleteAportacion,
+} from "../API/firebase";
 import { getAuth } from "firebase/auth";
 import { useDatosStore } from "@/stores/DatosForm";
 
@@ -211,6 +221,19 @@ export default {
 
       dameProgreso();
     };
+    const borrarAportacion = () => {
+      progresoUsuario.value.dias = progresoUsuario.value.dias.slice(0, -1);
+      progresoUsuario.value.peso = progresoUsuario.value.peso.slice(0, -1);
+      progresoUsuario.value.repeticiones =
+        progresoUsuario.value.repeticiones.slice(0, -1);
+      console.log(progresoUsuario.value.dias);
+      updateProgreso("PROGRESO", progresoId.value, {
+        dias: progresoUsuario.value.dias,
+        peso: progresoUsuario.value.peso,
+        repeticiones: progresoUsuario.value.repeticiones,
+      });
+      alert("Aportación borrada con éxito");
+    };
 
     return {
       chartCanvas,
@@ -219,6 +242,7 @@ export default {
       repeticionesInput,
       pesoInput,
       actualizarProgreso,
+      borrarAportacion,
       progresoUsuario,
       aut,
       datos,
