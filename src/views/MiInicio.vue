@@ -65,7 +65,7 @@
     <div class="carouselRecetas">
       <MiCarousel />
       <button
-        class="bg-yellow-300 pl-2 pr-2 mt-2 rounded-sm hover:bg-yellow-500"
+        class="mt-3 mb-3bg rounded-md p-1 bg-yellow-300 text-zinc-800 hover:bg-yellow-200 transition-all"
         @click="verRectas"
       >
         Ver más recetas

@@ -1,27 +1,38 @@
 <template>
   <div>
-    <h1 class="text-crear-rutina text-xl font-semibold">
+    <h1 class="text-crear-rutina text-1xl text-gray-400">
       Para crear tu rutina lo que tienes que hacer es rellenar día a día los
       ejercicios que realizarás, marcando el número de ejercicios, sus
       respectivos nombres y número de series. Una vez finalizado dale al botón
       de añadir y continúa con los demás días.
     </h1>
-    <h1 class="text-crear-rutina text-xl font-semibold">
+    <h1 class="text-crear-rutina text-1xl text-gray-400">
       Si quieres editar un día de tu rutina, tienes que rellenar el día con los
       ejercicios que ya están incluidos y los nuevos que quieras añadir. Para
       borrar un día, simplemente selecciona el día que quieras borrar y haz
       click en el botón de eliminar
     </h1>
-    <div class="dia">
-      <h1 class="text-xl font-semibold">Nombre del día</h1>
+
+    <div class="dia rounded-md bg-zinc-800">
+      <h1 class="text-xl font-semibold text-white">Día de la semana</h1>
+      <select v-model="opciones" class="p-1 mb-8 text-gray-500">
+        <option>Lunes</option>
+        <option>Martes</option>
+        <option>Miercoles</option>
+        <option>Jueves</option>
+        <option>Viernes</option>
+        <option>Sabado</option>
+        <option>Domingo</option>
+      </select>
+      <h1 class="text-xl font-semibold text-white">Grupos musculares</h1>
       <input
-        class="mb-3 p-1 text-gray-500"
+        class="w-64 rounded-md mt-1 mb-4 h-8"
         v-model="nombre_musculo"
         placeholder="Pecho y triceps"
       />
-      <h1 class="text-xl font-semibold">Número de ejercicios</h1>
+      <h1 class="text-xl font-semibold text-white">Número de ejercicios</h1>
       <input
-        class="mb-3 p-1 text-gray-500"
+        class="w-64 rounded-md mt-1 mb-4 h-8"
         v-model="num_ejs"
         type="number"
         placeholder="1"
@@ -45,21 +56,18 @@
           />
         </li>
       </ul>
-      <h1 class="text-xl font-semibold">Día de la semana</h1>
-      <select v-model="opciones" class="p-1 mb-8 text-gray-500">
-        <option>Lunes</option>
-        <option>Martes</option>
-        <option>Miercoles</option>
-        <option>Jueves</option>
-        <option>Viernes</option>
-        <option>Sabado</option>
-        <option>Domingo</option>
-      </select>
+
       <div class="botones">
-        <button class="bg-yellow-300 pl-2 pr-2 ml-2 mr-2" @click="anhadirDia">
+        <button
+          class="rounded-md p-1 bg-yellow-300 text-zinc-800 hover:bg-yellow-200 transition-all m-2"
+          @click="anhadirDia"
+        >
           Añadir
         </button>
-        <button class="bg-yellow-300 pl-2 pr-2 ml-2 mr-2" @click="borrarDia">
+        <button
+          class="rounded-md p-1 bg-yellow-300 text-zinc-800 hover:bg-yellow-200 transition-all m-2"
+          @click="borrarDia"
+        >
           Eliminar
         </button>
       </div>
@@ -121,7 +129,7 @@ const borrarDia = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid white;
+
   margin-left: 4em;
   margin-right: 4em;
   padding: 1em;
@@ -131,7 +139,7 @@ const borrarDia = () => {
   align-items: center;
   margin-left: 4em;
   margin-right: 4em;
-  padding: 1em;
+  padding: 10px;
   text-align: center;
 }
 .botones {

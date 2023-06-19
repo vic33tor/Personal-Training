@@ -1,16 +1,17 @@
 <template>
   <div v-if="existe">
-    <ul>
+    <ul class="place-content-center">
       <li v-for="(clase, idx) in misClases" :key="idx">
         <div class="contenedorTitulo p-6 mb-6">
           <div>
-            <h2 class="text-xl font-semibold">{{ clase.nombre }}</h2>
+            <h2 class="text-xl font-semibold text-white">{{ clase.nombre }}</h2>
             <p class="text-gray-500 mt-1">
               Hora: {{ clase.inicio }}-{{ clase.fin }}
             </p>
+
             <p class="text-gray-500 mt-1">Días: {{ clase.dias }}</p>
             <button
-              class="bg-yellow-300 pl-2 pr-2 ml-2 mr-2 mt-4"
+              class="mt-3 mb-3bg rounded-md p-1 bg-yellow-300 text-zinc-800 hover:bg-yellow-200 transition-all"
               @click="borrarClase(idx)"
             >
               Eliminar
@@ -53,7 +54,7 @@ onMounted(async () => {
 });
 const borrarClase = (index) => {
   deleteClase("USUARIOS", datos.getUsuario, {
-    clases: arrayRemove(misClases.value[index])
+    clases: arrayRemove(misClases.value[index]),
   });
   alert("Clase borrada con éxito");
 };
@@ -63,6 +64,10 @@ const borrarClase = (index) => {
 .contenedorTitulo {
   display: flex;
   justify-content: center;
-  border: 1px solid white;
+  background-color: rgb(39 39 42);
+  place-content: center;
+  width: 75%;
+  margin: 0 auto;
+  border-radius: 10px;
 }
 </style>

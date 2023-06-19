@@ -18,7 +18,7 @@
     <div class="items-end content-end text-right">
       <button
         @click="asistirClase(claseActual)"
-        class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-500 w-4/12 mr-8"
+        class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-200 w-4/12 mr-8 transition-colors"
       >
         Asistir
       </button>

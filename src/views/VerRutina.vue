@@ -20,9 +20,7 @@
         <li class="w-full" v-for="(dia, idx) in rutinaFiltro" :key="idx">
           <div v-if="Object.prototype.toString.call(dia) === `[object Object]`">
             <div v-if="!idx" class="nombre_dia">{{ opciones }}</div>
-            <div class="nombre_musculo">
-              {{ dia.nombre_dia }}
-            </div>
+            <div class="nombre_musculo">{{ dia.nombre_dia }}</div>
             <div v-for="(ej, idx) in rutinaFiltro" :key="idx">
               <div class="ejercicio" v-if="dia.nombre_dia">
                 <span class="items-start text-gray-500">{{ ej.nombre }}</span>
@@ -36,8 +34,12 @@
           </div>
           <div v-else class="w-full">
             <ul :class="{ dia_completo: showSecondUl }">
-              <div class="nombre_dia">{{ idx }}</div>
-              <li class="nombre_musculo" v-for="(ej, idx) in dia" :key="idx">
+              <div class="nombre_dia text-white">{{ idx }}</div>
+              <li
+                class="nombre_musculo text-white"
+                v-for="(ej, idx) in dia"
+                :key="idx"
+              >
                 {{ ej.nombre_dia }}
               </li>
               <li class="ejercicio" v-for="(ej, idx) in dia" :key="idx">
@@ -129,9 +131,7 @@ const toggleShowSecondUlFalse = () => {
 <style scoped>
 .nombre_dia {
   text-align: center;
-  font-size: xx-large;
-  line-height: 1.75rem;
-  font-weight: 600;
+  font-size: x-large;
   margin-top: 8px;
 }
 .rutina {
@@ -145,20 +145,20 @@ const toggleShowSecondUlFalse = () => {
 
 .nombre_musculo {
   text-align: center;
-  font-size: x-large;
+  font-size: large;
   font-weight: 600;
 }
 .ejercicio {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  place-content: center;
+  gap: 30px;
 }
 
 .dia_completo {
   width: 100%;
-  border: 1px solid white;
+  border-radius: 10px;
+  background-color: rgb(39 39 42);
 }
 </style>

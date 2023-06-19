@@ -17,7 +17,7 @@
         </p>
         <RouterLink
           :to="{ name: routes[0] }"
-          class="bg-yellow-300 rounded-sm px-4 py-2 hover:bg-yellow-500"
+          class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-200 transition-colors"
         >
           Ver más clases
         </RouterLink>
@@ -40,7 +40,7 @@
         </p>
         <RouterLink
           :to="{ name: routes[1] }"
-          class="bg-yellow-300 rounded-sm px-4 py-2 hover:bg-yellow-500"
+          class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-200 transition-colors"
         >
           Contrata tu monitor
         </RouterLink>
