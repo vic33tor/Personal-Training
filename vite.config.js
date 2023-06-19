@@ -6,6 +6,7 @@ import vue from "@vitejs/plugin-vue";
 // https://vitejs.dev/config/
 export default defineConfig({
   build: { chunkSizeWarningLimit: 1600 },
+  base: '/Personal-Training/',
   plugins: [vue()],
   resolve: {
     alias: {
