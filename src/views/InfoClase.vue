@@ -82,6 +82,7 @@ const dameClase = (id) => {
   margin-top: 10px;
   width: 50%;
   padding-bottom: 50px;
+  margin-bottom: 90px;
 }
 
 .contenedorTitulo {
