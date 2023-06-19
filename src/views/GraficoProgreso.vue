@@ -28,7 +28,7 @@
       >
         <h1 class="">Agregar datos</h1>
       </button>
-      <canvas ref="chartCanvas" class="bg-opacity-90 bg-white"></canvas>
+      <canvas ref="chartCanvas" class="bg-opacity-90 bg-white mb-24"></canvas>
     </div>
   </div>
   <div

@@ -19,11 +19,13 @@
       <ul class="w-full" :class="{ dia_completo: !showSecondUl }">
         <li class="w-full" v-for="(dia, idx) in rutinaFiltro" :key="idx">
           <div v-if="Object.prototype.toString.call(dia) === `[object Object]`">
-            <div v-if="!idx" class="nombre_dia">{{ opciones }}</div>
-            <div class="nombre_musculo">{{ dia.nombre_dia }}</div>
+            <div v-if="!idx" class="nombre_dia text-white">{{ opciones }}</div>
+            <div class="nombre_musculo text-white">{{ dia.nombre_dia }}</div>
             <div v-for="(ej, idx) in rutinaFiltro" :key="idx">
               <div class="ejercicio" v-if="dia.nombre_dia">
-                <span class="items-start text-gray-500">{{ ej.nombre }}</span>
+                <span class="items-start text-gray-500 mt-4 mb-4">{{
+                  ej.nombre
+                }}</span>
                 <span
                   v-if="ej.series != undefined"
                   class="items-end text-gray-500"
