@@ -68,6 +68,10 @@ export const updateRutina = (ref, id, objeto) =>
 export const deleteClase = (ref, id, objeto) =>
   updateDoc(doc(db, ref, id), objeto);
 
+export const deleteAportacion = (ref, id, objeto) =>
+  updateDoc(doc(db, ref, id), objeto);
+
+
 export const onDameReceta = (ref, callback) =>
   onSnapshot(collection(db, ref), callback);
 
@@ -111,9 +115,7 @@ export const updateNombreProgreso = (ref, id, objeto) => {
 };
 
 export const deleteProgreso = (documentId) => {
-  const documentRef = doc(collection(db, "PROGRESO"), documentId); // Reemplaza "nombre_coleccion" con el nombre de tu colección
+  const documentRef = doc(collection(db, "PROGRESO"), documentId); 
   deleteDoc(documentRef);
-  console.log("Documento eliminado correctamente");
 };
 
-// Llamada a la función para eliminar un documento específico
