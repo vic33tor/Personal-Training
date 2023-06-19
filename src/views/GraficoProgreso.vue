@@ -35,7 +35,7 @@
     v-show="!datos.getIdProgreso"
     class="place-content-center text-center items-center"
   >
-    <h1 class="text-4xl text-white mt-2 mb-2 w-2/4">
+    <h1 class="text-1xl text-gray-400 place-content-center mt-4">
       Debes crear tu progreso para viusalizarlo. Hazlo en el apartado "Control
       de progreso"
     </h1>

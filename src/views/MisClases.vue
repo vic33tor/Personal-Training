@@ -7,7 +7,10 @@
       </div>
     </div>
 
-    <select v-model="opciones" class="mt-2 text-black rounded-md">
+    <select
+      v-model="opciones"
+      class="mt-2 p-1 text-gray-500 rounded-md text-center"
+    >
       <option value="">Todas</option>
       <option value="contacto">Deportes de contacto</option>
       <option value="baile">Baile</option>

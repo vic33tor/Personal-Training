@@ -17,14 +17,14 @@
       <button
         v-if="datos.getTieneMonitor !== monitorActual.id"
         @click="contrataMonitor(monitorActual.id)"
-        class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-500 w-4/12 mr-8"
+        class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-200 w-4/12 mr-8 transition-colors"
       >
         Contratar
       </button>
       <button
         v-else
         @click="eliminaMonitor(monitorActual.id)"
-        class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-500 w-4/12 mr-8"
+        class="bg-red-400 hover:bg-red-200 rounded-md px-4 py-2 w-4/12 mr-8 transition-colors"
       >
         Eliminar
       </button>

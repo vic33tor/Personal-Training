@@ -9,7 +9,7 @@
         <li
           v-for="item in monitores"
           :key="item.id"
-          class="monitor border border-gray-300 rounded-lg p-4 flex items-center bg-zinc-800 w-2/4 text-gray-200"
+          class="monitor rounded-lg p-4 flex items-center bg-zinc-800 w-2/4 text-gray-200"
         >
           <div class="ml-2">
             <img
@@ -29,14 +29,14 @@
           <button
             v-if="datos.getTieneMonitor !== item.id"
             @click="contrataMonitor(item.id)"
-            class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-500 mr-2 text-black"
+            class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-200 mr-2 text-black"
           >
             Contratar
           </button>
           <button
             v-else
             @click="eliminaMonitor()"
-            class="bg-yellow-300 rounded-md px-4 py-2 hover:bg-yellow-500 mr-2 text-black"
+            class="bg-red-400 rounded-md px-4 py-2 hover:bg-red-200 mr-2 text-black"
           >
             Eliminar
           </button>
@@ -129,7 +129,6 @@ ul {
 }
 .monitor {
   height: fit-content;
-  border: solid 1px white;
   padding: 6px;
   box-shadow: 0 4px 8px 0 rgba(162, 255, 0, 0.2);
   transition: 0.3s;
@@ -144,5 +143,12 @@ ul {
 
 .name {
   color: yellow;
+}
+
+@media screen and (max-width: 830px) {
+  .monitor {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>
