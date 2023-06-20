@@ -8,7 +8,7 @@
         <option value="">Todos</option>
         <option value="Lunes">Lunes</option>
         <option value="Martes">Martes</option>
-        <option value="Miercoles">Miércoles</option>
+        <option value="Miercoles">Miercoles</option>
         <option value="Jueves">Jueves</option>
         <option value="Viernes">Viernes</option>
         <option value="Sábado">Sábado</option>
@@ -86,7 +86,7 @@ onMounted(async () => {
           const order = [
             "Lunes",
             "Martes",
-            "Miercoles",
+            "Miércoles",
             "Jueves",
             "Viernes",
             "Sabado",
@@ -108,7 +108,12 @@ onMounted(async () => {
 const rutinaFiltro = computed(() => {
   if (!opciones.value) {
     toggleShowSecondUlTrue();
-    return ordenados.value;
+    if (Object.entries(ordenados.value).length === 0) {
+      let descanso = { "Aún no ha creado ninguna rutina": 2 };
+      return descanso;
+    } else {
+      return ordenados.value;
+    }
   } else {
     toggleShowSecondUlFalse();
     const claves = Object.keys(miRutina.value[0]);

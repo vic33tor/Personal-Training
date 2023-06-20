@@ -27,7 +27,9 @@
     </ul>
   </div>
   <div v-else>
-    <h2 class="text-xl font-semibold">Todavía no vas a ninguna clase</h2>
+    <h2 class="contenedorTitulo p-6 mb-6 text-xl font-semibold text-white">
+      Todavía no vas a ninguna clase
+    </h2>
   </div>
 </template>
 
@@ -38,24 +40,21 @@ import { useDatosStore } from "@/stores/DatosForm";
 import { arrayRemove } from "firebase/firestore";
 const datos = useDatosStore();
 const misClases = ref([]);
-const existe = ref(false);
+const existe = ref();
 onMounted(async () => {
   onGetClases("USUARIOS", (docs) => {
     misClases.value = [];
     docs.forEach((doc) => {
       if (doc.id == datos.getUsuario) {
+        if (doc.data().clases.length == 0) {
+          existe.value = false;
+        } else {
+          existe.value = true;
+        }
         misClases.value = doc.data().clases;
       }
     });
   });
-  console.log(misClases);
-  if (misClases.value === []) {
-    existe.value = false;
-    console.log("false");
-  } else {
-    existe.value = true;
-    console.log("true");
-  }
 });
 const borrarClase = (index) => {
   deleteClase("USUARIOS", datos.getUsuario, {
