@@ -28,7 +28,7 @@
       <input
         class="w-64 rounded-md mt-1 mb-4 h-8"
         v-model="nombre_musculo"
-        placeholder="Pecho y triceps"
+        placeholder="Pecho y tríceps"
       />
       <h1 class="text-xl font-semibold text-white">Número de ejercicios</h1>
       <input

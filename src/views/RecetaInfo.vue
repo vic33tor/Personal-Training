@@ -57,5 +57,6 @@ const dameRecetaFiltrada = (id) => {
   margin-top: 10px;
   width: 75%;
   padding-bottom: 50px;
+  margin-bottom: 90px;
 }
 </style>
